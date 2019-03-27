@@ -1,40 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Recipe"
+    tools:context=".RecipeView"
     android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    android:background="#ffff">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Placeholder title"
-        android:layout_gravity="center"
-        android:id="@+id/textViewTitle"
-        />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients:"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recipe:"/>
-    <TextView
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:gravity="top"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/burger" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sdfdfgdfgdfghjklpokjhnjijnjnnjkjnjijnnjijhjikjnbnjkijnjkjnjkjnknknknkokjkokjjkkmnklkmklokmklolkmklkmklkmklmklk"
-        android:id="@+id/textViewRecipe"/>
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="8dp"
+                android:tint="@color/colorPrimary"
+                app:backgroundTint="#ffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:maxImageSize="36dp"
+                app:rippleColor="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_menu_save" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/fabRate"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fabFavorite"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hampurilainen liian pienellä pihvillä ja paljolla tomaatilla"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25dp"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"/>
+                <TextView
+                    android:id="@+id/textViewTags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="tags"
+                    android:textSize="20dp"
+                    android:textColor="@color/colorAccent"/>
+
+                <ImageView
+                    android:id="@+id/imageStars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="20dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/stars_4" />
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:tint="@color/colorPrimary"
+                app:backgroundTint="#ffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:maxImageSize="36dp"
+                app:rippleColor="@color/colorPrimary"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/ingredientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Ingredients"
+            android:textColor="#fff"
+
+           />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/instructionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ffff"
+            android:text="Instructions"
+            android:textColor="#f0000000" />
+    </LinearLayout>
+
+</LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewRecipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:text="sdfdfgasdfghjklöä'äölkjdfghjklöäölkjhkä'äölkjhlöäöjgfdfghklöä'äöuyresasdfghjkhgfdsasdfgjklöädfghjklöfghjklöäölkjhgfghjklölkjhfghjklöäsfdjgfjfjhgjhghghghghghghhgghghghghghghghghdfgdfghjklpokjhnjijnjnnjkjnjijnnjijhjikjnbnjkijnjkjnjkjnknknknkokjkokjjkkmnklkmklokmklolkmklkmklkmklmklk"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
