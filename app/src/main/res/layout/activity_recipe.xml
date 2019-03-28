@@ -9,15 +9,17 @@
     tools:context=".RecipeView"
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
-    android:background="#ffff">
+    android:background="@color/colorWhite">
+
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
@@ -29,161 +31,241 @@
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/burger" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_margin="10dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="8dp"
-                android:tint="@color/colorPrimary"
-                app:backgroundTint="#ffff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:maxImageSize="36dp"
-                app:rippleColor="@color/colorPrimary"
-                app:srcCompat="@android:drawable/ic_menu_save" />
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/fabRate"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/fabFavorite"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewTitle"
-                    android:layout_width="wrap_content"
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Hampurilainen liian pienellä pihvillä ja paljolla tomaatilla"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="25dp"
-                    android:textAlignment="center"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginRight="80dp"/>
-                <TextView
-                    android:id="@+id/textViewTags"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="tags"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorAccent"/>
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageStars"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:maxHeight="20dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/stars_4" />
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fabFavorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="8dp"
+                        android:tint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:maxImageSize="36dp"
+                        app:rippleColor="@color/colorPrimary"
+                        app:srcCompat="@android:drawable/ic_menu_save" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@+id/fabRate"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/fabFavorite"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="80dp"
+                            android:layout_marginRight="80dp"
+                            android:text="Fixed"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="28dp" />
+
+                        <TextView
+                            android:id="@+id/textViewTags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="tags"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="22dp" />
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textViewTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="9000min"
+                                app:layout_constraintEnd_toStartOf="@+id/imageStars"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"/>
+
+                            <ImageView
+                                android:id="@+id/imageStars"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:adjustViewBounds="true"
+                                android:maxHeight="20dp"
+                                android:scaleType="fitCenter"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/stars_4" />
+
+                            <TextView
+                                android:id="@+id/textViewAuthor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="By: Niinistö"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/imageStars"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:layout_constraintHorizontal_bias="1.0"/>
+                        </android.support.constraint.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fabRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:tint="@color/colorPrimary"
+                        app:backgroundTint="@color/colorWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:maxImageSize="36dp"
+                        app:rippleColor="@color/colorPrimary"
+                        app:srcCompat="@android:drawable/btn_star_big_on" />
+                </android.support.constraint.ConstraintLayout>
+
             </LinearLayout>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabRate"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_margin="10dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:tint="@color/colorPrimary"
-                app:backgroundTint="#ffff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:maxImageSize="36dp"
-                app:rippleColor="@color/colorPrimary"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
-        </android.support.constraint.ConstraintLayout>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="10dp">
+                    <Button
+                        android:id="@+id/ingredientButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:text="Ingredients"
+                        android:textColor="@color/colorWhite"
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+                        />
 
-        <Button
-            android:id="@+id/ingredientButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Ingredients"
-            android:textColor="#fff"
+                </LinearLayout>
 
-           />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    </LinearLayout>
+                    <Button
+                        android:id="@+id/instructionsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorWhite"
+                        android:text="Instructions"
+                        android:textColor="@color/colorBlack" />
+                </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/instructionsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ffff"
-            android:text="Instructions"
-            android:textColor="#f0000000" />
-    </LinearLayout>
-
-</LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textViewRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:text=""
                 android:textAlignment="center"
-                android:textSize="18dp"
-                android:text="sdfdfgasdfghjklöä'äölkjdfghjklöäölkjhkä'äölkjhlöäöjgfdfghklöä'äöuyresasdfghjkhgfdsasdfgjklöädfghjklöfghjklöäölkjhgfghjklölkjhfghjklöäsfdjgfjfjhgjhghghghghghghhgghghghghghghghghdfgdfghjklpokjhnjijnjnnjkjnjijnnjijhjikjnbnjkijnjkjnjkjnknknknkokjkokjjkkmnklkmklokmklolkmklkmklkmklmklk"
-                />
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Comments:"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/commentText"/>
+
+            <Button
+                android:id="@+id/commentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Add comment"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
     </ScrollView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/commentList"></ListView>
+
 </LinearLayout>

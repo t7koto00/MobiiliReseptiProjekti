@@ -8,10 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -22,15 +26,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class RecipeView extends AppCompatActivity implements View.OnClickListener{
 
     public Button instructionsButton = null;
     public Button ingredientsButton = null;
-    FloatingActionButton fabFavorite = null;
-    FloatingActionButton fabRate = null;
-    TextView textViewRecipe = null;
-    TextView textViewTitle = null;
-    TextView textViewTags = null;
+    public Button commentButton = null;
+    public FloatingActionButton fabFavorite = null;
+    public FloatingActionButton fabRate = null;
+    public TextView textViewRecipe = null;
+    public TextView textViewTitle = null;
+    public TextView textViewTags = null;
+    public TextView textViewTime = null;
+    public TextView textViewAuthor = null;
+    public EditText commentText = null;
+    public FirebaseFirestore db = null;
+    public Recipe recipe = null;
+    ArrayList<String> comments = new ArrayList<>();
+    ListView commentList = null;
+    commentArrayAdapter arrayAdapter = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +56,10 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
         ingredientsButton = findViewById(R.id.ingredientButton);
         instructionsButton = findViewById(R.id.instructionsButton);
+        commentButton = findViewById(R.id.commentButton);
         ingredientsButton.setOnClickListener(this);
         instructionsButton.setOnClickListener(this);
+        commentButton.setOnClickListener(this);
 
         fabFavorite = (FloatingActionButton) findViewById(R.id.fabFavorite);
         fabFavorite.setOnClickListener(this);
@@ -51,6 +70,26 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         textViewRecipe = findViewById(R.id.textViewRecipe);
         textViewTags = findViewById(R.id.textViewTags);
         textViewTitle = findViewById(R.id.textViewTitle);
+        textViewTime = findViewById(R.id.textViewTime);
+        textViewAuthor = findViewById(R.id.textViewAuthor);
+        commentText = findViewById(R.id.commentText);
+
+        commentList= (ListView) findViewById(R.id.commentList);
+
+
+         db = FirebaseFirestore.getInstance();
+         recipe = new Recipe();
+        /* comments.add("pahhaa");
+         comments.add("nam");
+         recipe.setComments(comments);
+        recipe.setId("Burger");
+        recipe.setTitle("Burger");
+        recipe.setTags("L, G");
+        recipe.setIngredients("Ingredients for burger:");
+        recipe.setInstructions("Instructions for burger:");
+        recipe.setTime("30 mins");
+        recipe.setUsername("Ronald");
+        db.collection("recipes").document("Burger").set(recipe);*/
 
         getRecipe();
 
@@ -65,7 +104,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorPrimary) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorWhite) );
 
-            textViewRecipe.setText("1 pound ground lean (7% fat) beef\n 1 large egg\n 1/2 cup minced onion 1/4 cup fine dried bread crumbs 1 tablespoon Worcestershire 1 or 2 cloves garlic, peeled and minced About 1/2 teaspoon salt About 1/4 teaspoon pepper 4 hamburger buns (4 in. wide), split About 1/4 cup mayonnaise About 1/4 cup ketchup 4 iceberg lettuce leaves, rinsed and crisped 1 firm-ripe tomato, cored and thinly sliced 4 thin slices red onion\n");
+            textViewRecipe.setText(recipe.getIngredients());
         }
         else if (view == instructionsButton) {
             ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorBlack, null));
@@ -73,21 +112,17 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorWhite) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorPrimary) );
 
-            textViewRecipe.setText("Step 1\n" +
-                    "In a bowl, mix ground beef, egg, onion, bread crumbs, Worcestershire, garlic, 1/2 teaspoon salt, and 1/4 teaspoon pepper until well blended. Divide mixture into four equal portions and shape each into a patty about 4 inches wide.\n\n Step 2\n" +
-                    "Lay burgers on an oiled barbecue grill over a solid bed of hot coals or high heat on a gas grill (you can hold your hand at grill level only 2 to 3 seconds); close lid on gas grill. Cook burgers, turning once, until browned on both sides and no longer pink inside (cut to test), 7 to 8 minutes total. Remove from grill.\n" +
-                    "\n" +
-                    "Step 3\n" +
-                    "Lay buns, cut side down, on grill and cook until lightly toasted, 30 seconds to 1 minute.\n" +
-                    "\n" +
-                    "Step 4\n" +
-                    "Spread mayonnaise and ketchup on bun bottoms. Add lettuce, tomato, burger, onion, and salt and pepper to taste. Set bun tops in place.");
+            textViewRecipe.setText(recipe.getInstructions());
         }
         else if (view == fabFavorite){
             favorite();
         }
         else if (view == fabRate){
             rate();
+        }
+        else if (view == commentButton)
+        {
+            addComment();
         }
     }
 
@@ -100,23 +135,45 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     }
 
     void getRecipe(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("recipes").document("1");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+        DocumentReference docRef = db.collection("recipes").document("Burger");
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("Success", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("No", "No such document");
-                    }
-                } else {
-                    Log.d("Fail", "get failed with ", task.getException());
-                }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                recipe = documentSnapshot.toObject(Recipe.class);
+                textViewRecipe.setText(recipe.getIngredients());
+                textViewTags.setText(recipe.getTags());
+                textViewTitle.setText(recipe.getTitle());
+                textViewAuthor.setText(recipe.getUsername());
+                textViewTime.setText(recipe.getTime());
+                comments = recipe.getComments();
+
+               //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
+                 arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+                commentList.setAdapter(arrayAdapter);
+
             }
         });
+    }
+
+    void addComment(){
+        String comment = commentText.getText().toString();
+        comments = recipe.getComments();
+        comments.add(comment);
+
+        recipe.setComments(comments);
+        recipe.setId(recipe.getId());
+        recipe.setTitle(recipe.getTitle());
+        recipe.setTags(recipe.getTags());
+        recipe.setIngredients(recipe.getIngredients());
+        recipe.setInstructions(recipe.getInstructions());
+        recipe.setTime(recipe.getTime());
+        recipe.setUsername(recipe.getUsername());
+        db.collection("recipes").document(recipe.getId()).set(recipe);
+
+        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
+        arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+        commentList.setAdapter(arrayAdapter);
 
     }
 }
