@@ -1,33 +1,24 @@
 package com.example.courseclash;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RecipeView extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,6 +38,8 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     ArrayList<String> comments = new ArrayList<>();
     ListView commentList = null;
     commentArrayAdapter arrayAdapter = null;
+    public ImageView imageview = null;
+    int stars = 0;
 
 
     @Override
@@ -74,22 +67,12 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         textViewAuthor = findViewById(R.id.textViewAuthor);
         commentText = findViewById(R.id.commentText);
 
-        commentList= (ListView) findViewById(R.id.commentList);
+        imageview = findViewById(R.id.imageView);
 
+        commentList = (ListView) findViewById(R.id.commentList);
 
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
-        /* comments.add("pahhaa");
-         comments.add("nam");
-         recipe.setComments(comments);
-        recipe.setId("Burger");
-        recipe.setTitle("Burger");
-        recipe.setTags("L, G");
-        recipe.setIngredients("Ingredients for burger:");
-        recipe.setInstructions("Instructions for burger:");
-        recipe.setTime("30 mins");
-        recipe.setUsername("Ronald");
-        db.collection("recipes").document("Burger").set(recipe);*/
 
         getRecipe();
 
@@ -123,6 +106,14 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         else if (view == commentButton)
         {
             addComment();
+            commentText.setText("");
+            try  {
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            } catch (Exception e) {
+
+            }
+
         }
     }
 
@@ -146,11 +137,30 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                 textViewTitle.setText(recipe.getTitle());
                 textViewAuthor.setText(recipe.getUsername());
                 textViewTime.setText(recipe.getTime());
-                comments = recipe.getComments();
+                stars = recipe.getStars();
 
-               //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
-                 arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+                switch (stars){
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+
+                        default:
+                            break;
+                }
+                Glide.with(getApplicationContext()).load(recipe.getImage()).into(imageview);
+
+                comments = recipe.getComments();
+               ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
+               //arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
                 commentList.setAdapter(arrayAdapter);
+                Utility.setListViewHeightBasedOnChildren(commentList);
 
             }
         });
@@ -158,22 +168,26 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
     void addComment(){
         String comment = commentText.getText().toString();
-        comments = recipe.getComments();
-        comments.add(comment);
+        if(comment.length() != 0 ) {
+            comments = recipe.getComments();
+            comments.add(comment);
 
-        recipe.setComments(comments);
-        recipe.setId(recipe.getId());
-        recipe.setTitle(recipe.getTitle());
-        recipe.setTags(recipe.getTags());
-        recipe.setIngredients(recipe.getIngredients());
-        recipe.setInstructions(recipe.getInstructions());
-        recipe.setTime(recipe.getTime());
-        recipe.setUsername(recipe.getUsername());
-        db.collection("recipes").document(recipe.getId()).set(recipe);
+            recipe.setComments(comments);
+            //recipe.setId(recipe.getId());
+            //recipe.setTitle(recipe.getTitle());
+            //recipe.setTags(recipe.getTags());
+            //recipe.setIngredients(recipe.getIngredients());
+            //recipe.setInstructions(recipe.getInstructions());
+            //recipe.setTime(recipe.getTime());
+            //recipe.setUsername(recipe.getUsername());
+            db.collection("recipes").document(recipe.getId()).set(recipe);
 
-        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
-        arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
-        commentList.setAdapter(arrayAdapter);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments);
+            //arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+            commentList.setAdapter(arrayAdapter);
+            Utility.setListViewHeightBasedOnChildren(commentList);
+        }
 
     }
+
 }
