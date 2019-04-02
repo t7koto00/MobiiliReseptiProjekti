@@ -6,8 +6,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class Utility {
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
+    public static void setListViewHeightBasedOnChildren(ListView listView, commentArrayAdapter adapter) {
+        //ListAdapter listAdapter = listView.getAdapter();
+        commentArrayAdapter listAdapter = adapter;
         if (listAdapter == null) {
             // pre-condition
             return;

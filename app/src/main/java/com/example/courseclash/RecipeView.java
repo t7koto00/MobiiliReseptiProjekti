@@ -1,24 +1,47 @@
 package com.example.courseclash;
 
+import android.app.ActionBar;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class RecipeView extends AppCompatActivity implements View.OnClickListener{
 
@@ -39,6 +62,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     ListView commentList = null;
     commentArrayAdapter arrayAdapter = null;
     public ImageView imageview = null;
+    public ImageView imageStars = null;
     int stars = 0;
 
 
@@ -68,13 +92,15 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         commentText = findViewById(R.id.commentText);
 
         imageview = findViewById(R.id.imageView);
+        imageStars = findViewById(R.id.imageStars);
 
         commentList = (ListView) findViewById(R.id.commentList);
 
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
 
-        getRecipe();
+         //makeRecipe();
+        getRecipe("Burger");
 
     }
 
@@ -122,12 +148,70 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     }
 
     void rate() {
-        //arvostele resepti
+        final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
+        //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
+        final RatingBar ratingBar = new RatingBar(this);
+        ratingBar.setNumStars(5);
+        ratingBar.setStepSize(1);
+        ratingBar.setRating(5);
+
+        //Creates the layout where the RatingBar will be and sets some of its parameters
+        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        LinearLayout layout = new LinearLayout(this);
+        LinearLayout.LayoutParams parameters =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.FILL_PARENT,
+                        LinearLayout.LayoutParams.FILL_PARENT);
+        layout.setLayoutParams(parameters);
+        layout.setGravity(Gravity.CENTER);
+        layout.addView(ratingBar);
+
+        popDialog.setIcon(android.R.drawable.btn_star_big_on);
+        popDialog.setTitle("Rate this recipe!");
+        popDialog.setView(layout);
+
+// Button OK
+        popDialog.setPositiveButton(android.R.string.ok,
+
+        new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                int rating = ratingBar.getProgress();
+
+                //recipe.setTimesRated(2);
+                rating = (rating + recipe.getStars())/2;
+                recipe.setStars(rating);
+                db.collection("recipes").document(recipe.getId()).set(recipe);
+
+                dialog.dismiss();
+
+                Context context = getApplicationContext();
+                CharSequence text = "Thanks for rating!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        })
+
+// ButtonCancel
+                .setNegativeButton("Cancel",
+
+        new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.cancel();
+            }
+        });
+        popDialog.create();
+
+        popDialog.show();
     }
 
-    void getRecipe(){
+    void getRecipe(String recipeId){
 
-        DocumentReference docRef = db.collection("recipes").document("Burger");
+        DocumentReference docRef = db.collection("recipes").document(recipeId);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -138,17 +222,24 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                 textViewAuthor.setText(recipe.getUsername());
                 textViewTime.setText(recipe.getTime());
                 stars = recipe.getStars();
-
                 switch (stars){
+                    case 0:
+                        imageStars.setImageResource(R.drawable.star0);
+                        break;
                     case 1:
+                        imageStars.setImageResource(R.drawable.star1);
                         break;
                     case 2:
+                        imageStars.setImageResource(R.drawable.star2);
                         break;
                     case 3:
+                        imageStars.setImageResource(R.drawable.star3);
                         break;
                     case 4:
+                        imageStars.setImageResource(R.drawable.star4);
                         break;
                     case 5:
+                        imageStars.setImageResource(R.drawable.star5);
                         break;
 
                         default:
@@ -157,13 +248,14 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                 Glide.with(getApplicationContext()).load(recipe.getImage()).into(imageview);
 
                 comments = recipe.getComments();
-               ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments );
-               //arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+               arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
                 commentList.setAdapter(arrayAdapter);
-                Utility.setListViewHeightBasedOnChildren(commentList);
+                Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
 
             }
         });
+
+
     }
 
     void addComment(){
@@ -173,21 +265,24 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             comments.add(comment);
 
             recipe.setComments(comments);
-            //recipe.setId(recipe.getId());
-            //recipe.setTitle(recipe.getTitle());
-            //recipe.setTags(recipe.getTags());
-            //recipe.setIngredients(recipe.getIngredients());
-            //recipe.setInstructions(recipe.getInstructions());
-            //recipe.setTime(recipe.getTime());
-            //recipe.setUsername(recipe.getUsername());
             db.collection("recipes").document(recipe.getId()).set(recipe);
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RecipeView.this, android.R.layout.simple_list_item_1, comments);
-            //arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
+            arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
             commentList.setAdapter(arrayAdapter);
-            Utility.setListViewHeightBasedOnChildren(commentList);
+            Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
         }
 
     }
 
+    void makeRecipe()
+    {
+        Recipe newRecipe = new Recipe();
+        newRecipe.setId("TestiPizza");
+        newRecipe.setTitle("Pizza");
+        newRecipe.setStars(5);
+        newRecipe.setUsername("Mauno");
+        newRecipe.setTime("10 min");
+        newRecipe.setTags("L");
+        db.collection("recipes").document(newRecipe.getId()).set(newRecipe);
+    }
 }

@@ -6,6 +6,7 @@ public class Recipe {
 
     public int stars = 0;
     public String title, tags, id , ingredients, instructions, image, username, userid, time;
+
     ArrayList<String> comments = new ArrayList<>();
 
     public ArrayList<String> getComments() {

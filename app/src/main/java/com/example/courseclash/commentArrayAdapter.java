@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 public class commentArrayAdapter extends ArrayAdapter<String> {
 
+    private ArrayList<String> commentList = new ArrayList<>();
     public commentArrayAdapter(Context context, ArrayList<String> parts) {
         super(context,0, parts);
+        commentList = parts;
     }
 
     @NonNull
@@ -28,8 +30,10 @@ public class commentArrayAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
         }
 
+        String comment = commentList.get(position);
+
         TextView partText = convertView.findViewById(R.id.commentView);
-        partText.setText("testii");
+        partText.setText(comment);
 
         return convertView;
     }
