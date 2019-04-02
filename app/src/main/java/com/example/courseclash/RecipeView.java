@@ -1,12 +1,9 @@
 package com.example.courseclash;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -14,12 +11,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,20 +22,12 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
-
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class RecipeView extends AppCompatActivity implements View.OnClickListener{
 
@@ -145,6 +131,34 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
     void favorite() {
         //lisää resepti favorite listalle
+
+        //Väliaikaisesti avaa kehotus kirjautua
+        final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
+
+        popDialog.setTitle("Please login to add this to your favorites list");
+
+        popDialog.setPositiveButton(android.R.string.ok,
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                       //vie rekisteröinti sivulel!
+                    }
+                })
+
+                .setNegativeButton("Cancel",
+
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                dialog.cancel();
+                            }
+                        });
+        popDialog.create();
+
+        popDialog.show();
     }
 
     void rate() {
