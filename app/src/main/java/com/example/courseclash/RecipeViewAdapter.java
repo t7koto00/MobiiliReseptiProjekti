@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
@@ -37,7 +39,8 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
 
         }
         TextView recipeText = convertView.findViewById(R.id.recipe_title);
-        //ImageView recipeImage = convertView.findViewById(R.id.recipe_image);
+        ImageView recipeImage = convertView.findViewById(R.id.recipe_image);
+        Glide.with(getContext()).load(recipe.getImage()).into(recipeImage);
         TextView recipeTime = convertView.findViewById(R.id.recipe_time);
         TextView recipeTag = convertView.findViewById(R.id.recipe_tag);
         recipeText.setText(String.valueOf(recipe.getTitle()));
