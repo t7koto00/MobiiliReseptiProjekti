@@ -2,6 +2,7 @@ package com.example.courseclash;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +52,9 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     public ImageView imageview = null;
     public ImageView imageStars = null;
     int stars = 0;
+    private ProgressBar spinner;
+    public LinearLayout linearLayout = null;
+
 
 
     @Override
@@ -79,14 +84,21 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
         imageview = findViewById(R.id.imageView);
         imageStars = findViewById(R.id.imageStars);
-
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         commentList = (ListView) findViewById(R.id.commentList);
+
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
+        linearLayout.setVisibility(LinearLayout.INVISIBLE);
+
+        Intent intent = getIntent();
+        String id = (String) intent.getSerializableExtra("DATA");
 
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
 
          //makeRecipe();
-        getRecipe("Burger");
+        getRecipe(id);
 
     }
 
@@ -230,6 +242,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 recipe = documentSnapshot.toObject(Recipe.class);
+
                 textViewRecipe.setText(recipe.getIngredients());
                 textViewTags.setText(recipe.getTags());
                 textViewTitle.setText(recipe.getTitle());
@@ -265,6 +278,8 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
                 commentList.setAdapter(arrayAdapter);
                 Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
+                spinner.setVisibility(View.GONE);
+                linearLayout.setVisibility(LinearLayout.VISIBLE);
 
             }
         });

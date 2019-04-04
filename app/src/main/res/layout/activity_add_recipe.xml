@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,8 +31,10 @@
         android:text="Your recipes title:" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:hint="Pasta bolognese"
         android:id="@+id/editTextTitle"/>
 
     <TextView
@@ -40,8 +43,10 @@
         android:text="Time required for your recipe:"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="75dp"
+        android:hint="30 mins"
         android:id="@+id/editTextTime"/>
 
     <TextView
@@ -50,8 +55,10 @@
         android:text="Add some tags (lactose free, gluten free, vegan...):"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="100dp"
+        android:hint="L, G, Vegan"
         android:id="@+id/editTextTags"/>
 
     <TextView
@@ -59,10 +66,12 @@
         android:layout_height="wrap_content"
         android:text="Ingredients required for your recipe:"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextIngredients"/>
+        <EditText
+            android:id="@+id/editTextIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="1 egg \n2 dl milk \na lot of salt\nminced meat \npepper \n2 onions"
+            android:minHeight="150dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,6 +81,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="150dp"
+        android:hint="Add salt \nstir \nadd more salt \nMORE SALT \nstir stir stir stir"
         android:id="@+id/editTextInstructions"/>
 
     <TextView
@@ -86,21 +97,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose image from gallery"
+            android:text="Choose image"
             android:id="@+id/galleryButton"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take a new image"
+            android:text="Take new image"
             android:id="@+id/cameraButton"/>
     </LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Add this recipe!"
+            android:id="@+id/addButton"/>
 
     </LinearLayout>
     </ScrollView>
