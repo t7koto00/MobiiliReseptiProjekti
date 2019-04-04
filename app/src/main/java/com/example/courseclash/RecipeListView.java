@@ -28,7 +28,7 @@ public class RecipeListView extends AppCompatActivity{
     ListView listView = null;
     FirebaseFirestore db = null;
     Recipe recipe = null;
-    RecipeViewAdapter rAdapter = null;
+    private RecipeViewAdapter rAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class RecipeListView extends AppCompatActivity{
 
         getRecipes();
 
-        rAdapter = new RecipeViewAdapter(this, R.layout.recipe_list_item, recipeList);
+        rAdapter = new RecipeViewAdapter(this,R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
 
 
