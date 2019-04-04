@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "413536373882",
+    "firebase_url": "https://mobiilireseptiprojekti.firebaseio.com",
+    "project_id": "mobiilireseptiprojekti",
+    "storage_bucket": "mobiilireseptiprojekti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413536373882:android:8c6b15592d10869c",
+        "android_client_info": {
+          "package_name": "com.example.courseclash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413536373882-vlpl6tq4m5h3o77fq9ocraa8sn8f406a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.courseclash",
+            "certificate_hash": "0d36a4316628825329df624018619bcf56bd7a76"
+          }
+        },
+        {
+          "client_id": "413536373882-f3gl84oipt4invha48l9gm402ikrjm9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.courseclash",
+            "certificate_hash": "ddf440838271c225429cf2ac4c98cd6474408011"
+          }
+        },
+        {
+          "client_id": "413536373882-h2n4kh3gi1fti84t7d7s9ca2a79dksor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo7Gl7vlCm1oJJy_QaqxG0daP24s8Yyy4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413536373882-h2n4kh3gi1fti84t7d7s9ca2a79dksor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
