@@ -93,7 +93,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
         Intent intent = getIntent();
         String id = (String) intent.getSerializableExtra("DATA");
-
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
 

@@ -1,9 +1,11 @@
 package com.example.courseclash;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +13,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.UUID;
+
+import io.grpc.Context;
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +44,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     public ImageView imageView = null;
     private final int PICK_IMAGE_REQUEST = 71;
     private Uri filePath;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    StorageReference ref = null;
+    String imageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         addButton.setOnClickListener(this);
         imageView = findViewById(R.id.imageViewAdd);
         db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
 
     }
 
@@ -59,6 +77,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         if (view == cameraButton) {
         //kamera kuvan ottoa varten jos mahdollista
+
+
         }
         else if (view == galleryButton){
         // kuvan valinta galleriasta
@@ -69,7 +89,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
         else if (view == addButton){
 
-            addRecipeToDb();
+            uploadImage();
+
         }
         }
 
@@ -80,6 +101,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setTime(editTextTime.getText().toString());
         recipe.setInstructions(editTextInstructions.getText().toString());
         recipe.setIngredients(editTextIngredients.getText().toString());
+        recipe.setImage(imageURL);
         //kuva!!
         db.collection("recipes").add(recipe).
                 addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -117,4 +139,58 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+
+    private void uploadImage() {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+             ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            getImageDownloadUrl();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(AddRecipe.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
+    }
+
+    private void getImageDownloadUrl(){
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                recipe.setImage(uri.toString());
+                imageURL = uri.toString();
+                Log.d("TAG", uri.toString());
+                addRecipeToDb();
+                // Got the download URL for 'users/me/profile.png'
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
 }
