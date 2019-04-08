@@ -14,7 +14,6 @@
         <activity android:name=".AddRecipe"></activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".RecipeListView" />
-        <activity android:name=".Login" />
         <activity
             android:name=".RecipeView"
             android:screenOrientation="portrait"></activity>
