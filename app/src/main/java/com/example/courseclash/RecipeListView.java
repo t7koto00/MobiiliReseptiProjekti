@@ -1,9 +1,12 @@
 package com.example.courseclash;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,6 +46,14 @@ public class RecipeListView extends AppCompatActivity{
 
         rAdapter = new RecipeViewAdapter(this,R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getBaseContext(),RecipeView.class);
+                intent.putExtra("DATA", recipeList.get(position).getId());
+                startActivity(intent);
+            }
+        });
 
     }
     public void getRecipes() {

@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
 
                     if(task.isSuccessful()){
 
-                        startActivity(new Intent(Login.this, RecipeListView.class));
+                        startActivity(new Intent(Login.this, AddRecipe.class));
 
 
                     } else {

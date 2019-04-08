@@ -30,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/linearLayout1">
+            android:id="@+id/linearLayout1"
+            android:backgroundTint="@color/colorWhite">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -277,7 +278,10 @@
             <ListView
                 android:id="@+id/commentList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:dividerHeight="10dp"
+                android:backgroundTint="@color/colorWhite"></ListView>
         </LinearLayout>
     </ScrollView>
 

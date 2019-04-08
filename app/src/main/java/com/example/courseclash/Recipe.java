@@ -1,8 +1,9 @@
 package com.example.courseclash;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
     public int stars = 0;
     public String title, tags, id , ingredients, instructions, image, username, userid, time;
