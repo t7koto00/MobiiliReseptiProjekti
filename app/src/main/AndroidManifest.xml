@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RecipeListView"></activity>
-        <activity android:name=".Login"></activity>
         <activity android:name=".RecipeView"
             android:screenOrientation="portrait">
         </activity>
