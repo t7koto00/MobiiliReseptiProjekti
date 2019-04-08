@@ -36,33 +36,13 @@ public class RecipeListView extends AppCompatActivity{
         setContentView(R.layout.activity_recipe_view);
 
         listView = findViewById(R.id.recipe_listview);
-    /*
-        Recipe newRecipe = new Recipe();
-        newRecipe.setTitle("Paskaa");
-        newRecipe.setTags("kuk");
-        newRecipe.setTime("50");
-        recipeList.add(newRecipe);
-        Recipe newRecipe2 = new Recipe();
-        newRecipe2.setTitle("Paskaa2");
-        newRecipe2.setTags("kuk2");
-        newRecipe2.setTime("502");
 
-        recipeList.add(newRecipe2);
-        Recipe newRecipe3 = new Recipe();
-        newRecipe3.setTitle("Paskaa23");
-        newRecipe3.setTags("kuk23");
-        newRecipe3.setTime("5023");
-        recipeList.add(newRecipe3);
-*/
         db = FirebaseFirestore.getInstance();
 
         getRecipes();
 
         rAdapter = new RecipeViewAdapter(this,R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
-
-
-
 
     }
     public void getRecipes() {
@@ -76,16 +56,12 @@ public class RecipeListView extends AppCompatActivity{
                                 Log.d("Tag", document.getId() + " => " + document.getData());
                                 recipe = document.toObject(Recipe.class);
                                 recipeList.add(recipe);
-
                                 rAdapter.notifyDataSetChanged();
-
                             }
                         } else {
                             Log.d("errortag", "Error getting documents: ", task.getException());
                         }
                     }
                 });
-
     }
-
 }
