@@ -3,7 +3,7 @@
     <color name="colorPrimary">#FF9800</color>
     <color name="colorPrimaryDark">#FF5722</color>
     <color name="colorAccent">#000000</color>
-    <color name="colorWhite">#fff</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="commentBackground">#FFFFFF</color>
 </resources>

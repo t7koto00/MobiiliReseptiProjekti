@@ -24,14 +24,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/colorWhite"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/linearLayout1"
-            android:backgroundTint="@color/colorWhite">
+            android:id="@+id/linearLayout1">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -97,7 +97,8 @@
                             android:text="Fixed"
                             android:textAlignment="center"
                             android:textColor="@color/colorBlack"
-                            android:textSize="28dp" />
+                            android:textSize="28dp"
+                            app:fontFamily="@font/raleway" />
 
                         <TextView
                             android:id="@+id/textViewTags"
@@ -106,7 +107,8 @@
                             android:layout_gravity="center"
                             android:text="tags"
                             android:textColor="@color/colorBlack"
-                            android:textSize="22dp" />
+                            android:textSize="22dp"
+                            app:fontFamily="@font/raleway" />
 
                         <android.support.constraint.ConstraintLayout
                             android:layout_width="match_parent"
@@ -118,17 +120,19 @@
                                 android:id="@+id/textViewTime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="start"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginLeft="8dp"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="80dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
+                                android:gravity="start"
                                 android:text="9000min"
+                                android:textSize="18dp"
+                                app:fontFamily="@font/raleway"
                                 app:layout_constraintEnd_toStartOf="@+id/imageStars"
+                                app:layout_constraintHorizontal_bias="0.258"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintHorizontal_bias="0.0"/>
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/imageStars"
@@ -154,20 +158,22 @@
                                 android:id="@+id/textViewAuthor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="end"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_marginBottom="8dp"
+                                android:gravity="end"
                                 android:text="By: Niinistö"
+                                android:textSize="18dp"
+                                app:fontFamily="@font/raleway"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toEndOf="@+id/imageStars"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0"
-                                app:layout_constraintHorizontal_bias="1.0"/>
+                                app:layout_constraintVertical_bias="0.947" />
                         </android.support.constraint.ConstraintLayout>
 
                     </LinearLayout>
@@ -215,6 +221,8 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Ingredients"
+                        android:textSize="18dp"
+                        app:fontFamily="@font/raleway"
                         android:textColor="@color/colorWhite"
 
                         />
@@ -233,6 +241,8 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorWhite"
                         android:text="Instructions"
+                        android:textSize="18dp"
+                        app:fontFamily="@font/raleway"
                         android:textColor="@color/colorBlack" />
                 </LinearLayout>
 
@@ -248,7 +258,8 @@
                 android:layout_marginBottom="10dp"
                 android:text=""
                 android:textAlignment="center"
-                android:textSize="18dp" />
+                android:textSize="25dp"
+                app:fontFamily="@font/raleway" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -257,14 +268,16 @@
                 android:layout_marginTop="10dp"
                 android:text="Comments:"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                app:fontFamily="@font/raleway" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:id="@+id/commentText"/>
+                android:id="@+id/commentText"
+                app:fontFamily="@font/raleway"/>
 
             <Button
                 android:id="@+id/commentButton"
@@ -273,15 +286,17 @@
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Add comment"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                app:fontFamily="@font/raleway"
+                android:textSize="16dp"/>
 
             <ListView
                 android:id="@+id/commentList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:dividerHeight="10dp"
-                android:backgroundTint="@color/colorWhite"></ListView>
+                android:backgroundTint="@color/colorWhite"
+                android:dividerHeight="5dp"
+                android:divider="@color/colorWhite"></ListView>
         </LinearLayout>
     </ScrollView>
 

@@ -39,12 +39,11 @@ public class Login extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton);
 
-       mAuthListener = new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if(firebaseAuth.getCurrentUser() != null){
-
 
                 }
             }
@@ -55,7 +54,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String eMail = emailField.getText().toString();
                 String passWord = passwordField.getText().toString();
-                Log.d("Paskaperse", "pass: "+ passWord + " email: " + eMail);
+                Log.d("Credentials", "pass: "+ passWord + " email: " + eMail);
                 startSingIn(eMail,passWord);
 
             }
@@ -85,7 +84,7 @@ public class Login extends AppCompatActivity {
 
                     if(task.isSuccessful()){
 
-                        startActivity(new Intent(Login.this, AddRecipe.class));
+                        startActivity(new Intent(Login.this, RecipeListView.class));
 
 
                     } else {
