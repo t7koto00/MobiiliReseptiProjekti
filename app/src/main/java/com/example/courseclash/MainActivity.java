@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.app.SearchManager;
 import android.support.v7.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,9 +55,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_profile:
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessageFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                break;
+            case R.id.nav_favorite:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavoriteFragment()).commit();
+                break;
+            case R.id.nav_shopping_cart:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShoppingCartFragment()).commit();
+                break;
+            case R.id.nav_leaderboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();
+                break;
+            case R.id.nav_logout:
+                Toast.makeText(this, "Logout under construction", Toast.LENGTH_SHORT).show();
                 break;
         }
+
+        drawer.closeDrawer(GravityCompat.START);
 
         return true;
 
