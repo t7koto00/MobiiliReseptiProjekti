@@ -21,7 +21,8 @@ public class Login extends AppCompatActivity {
     private EditText emailField;
     private EditText passwordField;
 
-    private Button loginButton;
+    private Button loginButton, singupButton;
+
 
     private FirebaseAuth mAuth;
 
@@ -32,19 +33,30 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
         mAuth = FirebaseAuth.getInstance();
 
         emailField = findViewById(R.id.emailView);
         passwordField = findViewById(R.id.passwordView);
 
         loginButton = findViewById(R.id.loginButton);
+        singupButton = findViewById(R.id.signUpButton);
+
+        singupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Register_user.class));
+
+            }
+        });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 if(firebaseAuth.getCurrentUser() != null){
-
+                    startActivity(new Intent(Login.this, RecipeListView.class));
                 }
             }
         };
@@ -65,7 +77,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        mAuth.addAuthStateListener(mAuthListener);
+      //  mAuth.addAuthStateListener(mAuthListener);
     }
 
     private void startSingIn(String eMail, String passWord) {
@@ -84,7 +96,7 @@ public class Login extends AppCompatActivity {
 
                     if(task.isSuccessful()){
 
-                        startActivity(new Intent(Login.this, RecipeListView.class));
+                        startActivity(new Intent(Login.this, AddRecipe.class));
 
 
                     } else {

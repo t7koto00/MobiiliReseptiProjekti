@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,14 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecipeView"></activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Login" />
+        <activity android:name=".AddRecipe"></activity>
+        <activity android:name=".Register_user" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RecipeListView" />
         <activity
-            android:name=".AddRecipe"
-            android:screenOrientation="portrait"></activity>
+            android:name=".RecipeView"
+            android:screenOrientation="portrait" />
         <activity android:name=".Ingredients" />
-        <activity android:name=".RecipeListView">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
