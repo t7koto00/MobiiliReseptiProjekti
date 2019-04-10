@@ -3,9 +3,14 @@ package com.example.courseclash;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +29,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import io.grpc.Context;
@@ -49,6 +57,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     StorageReference ref = null;
     String imageURL;
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    String currentPhotoPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +81,32 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-
     }
 
     @Override
     public void onClick(View view) {
         if (view == cameraButton) {
-        //kamera kuvan ottoa varten jos mahdollista
-
-
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Ensure that there's a camera activity to handle the intent
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = FileProvider.getUriForFile(this,
+                            "com.example.android.fileprovider",
+                            photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
         }
         else if (view == galleryButton){
-        // kuvan valinta galleriasta
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -102,7 +127,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setInstructions(editTextInstructions.getText().toString());
         recipe.setIngredients(editTextIngredients.getText().toString());
         recipe.setImage(imageURL);
-        //kuva!!
         db.collection("recipes").add(recipe).
                 addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
         @Override
@@ -136,6 +160,53 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             {
                 e.printStackTrace();
             }
+        }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            File f = new File(currentPhotoPath);
+            filePath = Uri.fromFile(f);
+
+            int targetW = imageView.getWidth();
+            int targetH = imageView.getHeight();
+
+            // Get the dimensions of the bitmap
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            // Determine how much to scale down the image
+            int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+            // Decode the image file into a Bitmap sized to fill the View
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+            bmOptions.inPurgeable = true;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+
+            try {
+                ExifInterface exif = new ExifInterface(currentPhotoPath);
+                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+                Log.d("EXIF", "Exif: " + orientation);
+                Matrix matrix = new Matrix();
+                if (orientation == 6) {
+                    matrix.postRotate(90);
+                }
+                else if (orientation == 3) {
+                    matrix.postRotate(180);
+                }
+                else if (orientation == 8) {
+                    matrix.postRotate(270);
+                }
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true); // rotating bitmap
+            }
+            catch (Exception e) {
+
+            }
+
+            imageView.setImageBitmap(bitmap);
         }
     }
 
@@ -193,4 +264,20 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
 }
