@@ -32,6 +32,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -126,6 +127,14 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setTime(editTextTime.getText().toString());
         recipe.setInstructions(editTextInstructions.getText().toString());
         recipe.setIngredients(editTextIngredients.getText().toString());
+        ArrayList<Integer> emptyRatingList = new ArrayList<>();
+        emptyRatingList.add(0);
+        emptyRatingList.add(0);
+        emptyRatingList.add(0);
+        emptyRatingList.add(0);
+        emptyRatingList.add(0);
+        emptyRatingList.add(0);
+        recipe.setRateAmounts(emptyRatingList);
         recipe.setImage(imageURL);
         db.collection("recipes").add(recipe).
                 addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
