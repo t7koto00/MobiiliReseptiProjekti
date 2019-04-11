@@ -8,10 +8,20 @@ public class Recipe implements Serializable {
     public int stars = 0;
     public String title, tags, id , ingredients, instructions, image, username, userid, time;
     ArrayList<String> comments = new ArrayList<>();
+    ArrayList<Integer> rateAmounts = new ArrayList<>();
 
     public Recipe(){
 
     }
+
+    public ArrayList<Integer> getRateAmounts() {
+        return rateAmounts;
+    }
+
+    public void setRateAmounts(ArrayList<Integer> rateAmounts) {
+        this.rateAmounts = rateAmounts;
+    }
+
     public ArrayList<String> getComments() {
         return comments;
     }

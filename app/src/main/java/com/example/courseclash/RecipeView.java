@@ -54,6 +54,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     int stars = 0;
     private ProgressBar spinner;
     public LinearLayout linearLayout = null;
+    Boolean rated = false;
 
 
 
@@ -173,65 +174,85 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     }
 
     void rate() {
-        final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
-        //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
-        final RatingBar ratingBar = new RatingBar(this);
-        ratingBar.setNumStars(5);
-        ratingBar.setStepSize(1);
-        ratingBar.setRating(5);
+        if(rated == false) {
+            final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
+            //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
+            final RatingBar ratingBar = new RatingBar(this);
+            ratingBar.setNumStars(5);
+            ratingBar.setStepSize(1);
+            ratingBar.setRating(5);
 
-        //Creates the layout where the RatingBar will be and sets some of its parameters
-        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
-        LinearLayout layout = new LinearLayout(this);
-        LinearLayout.LayoutParams parameters =
-                new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.FILL_PARENT,
-                        LinearLayout.LayoutParams.FILL_PARENT);
-        layout.setLayoutParams(parameters);
-        layout.setGravity(Gravity.CENTER);
-        layout.addView(ratingBar);
+            //Creates the layout where the RatingBar will be and sets some of its parameters
+            LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+            stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+            LinearLayout layout = new LinearLayout(this);
+            LinearLayout.LayoutParams parameters =
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.FILL_PARENT,
+                            LinearLayout.LayoutParams.FILL_PARENT);
+            layout.setLayoutParams(parameters);
+            layout.setGravity(Gravity.CENTER);
+            layout.addView(ratingBar);
 
-        popDialog.setIcon(android.R.drawable.btn_star_big_on);
-        popDialog.setTitle("Rate this recipe!");
-        popDialog.setView(layout);
+            popDialog.setIcon(android.R.drawable.btn_star_big_on);
+            popDialog.setTitle("Rate this recipe!");
+            popDialog.setView(layout);
 
 // Button OK
-        popDialog.setPositiveButton(android.R.string.ok,
+            popDialog.setPositiveButton(android.R.string.ok,
 
-        new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                int rating = ratingBar.getProgress();
+                            int rating = ratingBar.getProgress();
+                            ArrayList<Integer> rateAmount = recipe.getRateAmounts();
 
-                //recipe.setTimesRated(2);
-                rating = (rating + recipe.getStars())/2;
-                recipe.setStars(rating);
-                db.collection("recipes").document(recipe.getId()).set(recipe);
+                            int rate = rateAmount.get(rating);
+                            rate = rate + 1;
 
-                dialog.dismiss();
+                            rateAmount.set(rating, rate);
+                            recipe.setRateAmounts(rateAmount);
 
-                Context context = getApplicationContext();
-                CharSequence text = "Thanks for rating!";
-                int duration = Toast.LENGTH_SHORT;
+                            rating = rateAmount.get(0) * 0 + rateAmount.get(1) * 1 + rateAmount.get(2) * 2 + rateAmount.get(3) * 3 + rateAmount.get(4) * 4 + rateAmount.get(5) * 5;
+                            Float f = (float) rating / (rateAmount.get(0) + rateAmount.get(1) + rateAmount.get(2) + rateAmount.get(3) + rateAmount.get(4) + rateAmount.get(5));
+                            int i = Math.round(f);
+                            recipe.setStars(i);
+                            db.collection("recipes").document(recipe.getId()).set(recipe);
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        })
+                            rated = true;
+
+                            dialog.dismiss();
+
+                            Context context = getApplicationContext();
+                            CharSequence text = "Thanks for rating!";
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                        }
+                    })
 
 // ButtonCancel
-                .setNegativeButton("Cancel",
+                    .setNegativeButton("Cancel",
 
-        new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
 
-                dialog.cancel();
-            }
-        });
-        popDialog.create();
+                                    dialog.cancel();
+                                }
+                            });
+            popDialog.create();
 
-        popDialog.show();
+            popDialog.show();
+        }
+        else if (rated == true) {
+            Context context = getApplicationContext();
+            CharSequence text = "You have already rated this recipe!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
     }
 
     void getRecipe(String recipeId){
