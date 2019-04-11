@@ -1,6 +1,5 @@
 package com.example.courseclash;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +17,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +40,8 @@ import java.util.UUID;
 
 import io.grpc.Context;
 
+import static android.view.View.GONE;
+
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener {
 
     public EditText editTextTitle = null;
@@ -57,6 +61,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     StorageReference storageReference;
     StorageReference ref = null;
     String imageURL;
+    LinearLayout linearLayout = null;
+    ProgressBar progressBar = null;
+    TextView textViewUploading = null;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     String currentPhotoPath;
@@ -74,6 +81,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         galleryButton = findViewById(R.id.galleryButton);
         cameraButton = findViewById(R.id.cameraButton);
         addButton = findViewById(R.id.addButton);
+        linearLayout = findViewById(R.id.linearLayout);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(GONE);
+        textViewUploading = findViewById(R.id.textViewUploading);
+        textViewUploading.setVisibility(GONE);
         galleryButton.setOnClickListener(this);
         cameraButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
@@ -106,19 +118,21 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             }
-        }
-        else if (view == galleryButton){
+        } else if (view == galleryButton) {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-        }
-        else if (view == addButton){
+        } else if (view == addButton) {
 
-            uploadImage();
+            if (editTextTitle.getText().length() == 0 || editTextInstructions.getText().length() == 0 || editTextIngredients.getText().length() == 0 || editTextTime.getText().length() == 0) {
+                Toast.makeText(AddRecipe.this, "Some of the required fields are empty!", Toast.LENGTH_SHORT).show();
+            } else {
 
+                uploadImage();
+            }
         }
-        }
+    }
 
         void addRecipeToDb()
     {
@@ -127,6 +141,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         recipe.setTime(editTextTime.getText().toString());
         recipe.setInstructions(editTextInstructions.getText().toString());
         recipe.setIngredients(editTextIngredients.getText().toString());
+        //tekijän nimi
+        //tekijän id
+        //osaksi recipeä!
         ArrayList<Integer> emptyRatingList = new ArrayList<>();
         emptyRatingList.add(0);
         emptyRatingList.add(0);
@@ -224,16 +241,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         if(filePath != null)
         {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
+            progressBar.setVisibility(View.VISIBLE);
+            textViewUploading.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(LinearLayout.INVISIBLE);
 
              ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
+                            progressBar.setVisibility(GONE);
+                            textViewUploading.setVisibility(GONE);
                             Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             getImageDownloadUrl();
                         }
@@ -241,7 +259,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
+                            progressBar.setVisibility(GONE);
+                            textViewUploading.setVisibility(GONE);
                             Toast.makeText(AddRecipe.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -250,9 +269,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            textViewUploading.setText("Uploaded "+(int)progress+"%");
                         }
                     });
+        }
+        else{
+            Toast.makeText(AddRecipe.this, "Choose a picture from your gallery, or take a new one!", Toast.LENGTH_SHORT).show();
         }
     }
 

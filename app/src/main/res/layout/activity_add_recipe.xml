@@ -10,6 +10,20 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/progressBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/textViewUploading"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:id="@+id/linearLayout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +45,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your recipes title:" />
+        android:text="Your recipes title(*):" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -42,7 +57,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time required for your recipe:"/>
+        android:text="Time required for your recipe(*):"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -66,7 +81,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingredients required for your recipe:"/>
+        android:text="Ingredients required for your recipe(*):"/>
 
         <EditText
             android:id="@+id/editTextIngredients"
@@ -78,7 +93,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instructions for making your recipe:"/>
+        android:text="Instructions for making your recipe(*):"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -90,7 +105,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add an image of your recipe:"/>
+        android:text="Add an image of your recipe(*):"/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -122,10 +137,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+
             android:text="Add this recipe!"
             android:id="@+id/addButton"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginBottom="20dp"
+            android:text="* = Required"/>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

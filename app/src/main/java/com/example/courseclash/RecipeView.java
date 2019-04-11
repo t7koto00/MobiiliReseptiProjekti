@@ -245,7 +245,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
             popDialog.show();
         }
-        else {
+        else if (rated == true) {
             Context context = getApplicationContext();
             CharSequence text = "You have already rated this recipe!";
             int duration = Toast.LENGTH_SHORT;
