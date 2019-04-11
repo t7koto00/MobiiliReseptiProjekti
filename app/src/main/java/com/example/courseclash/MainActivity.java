@@ -21,9 +21,9 @@ import android.app.SearchManager;
 import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity {
 
-   // private DrawerLayout drawer;
+    // private DrawerLayout drawer;
     public Button create_button;
     public Button ingredients_button;
 
@@ -110,4 +110,5 @@ public class MainActivity extends BaseActivity  {
 
 
     }*/
+    }
 }

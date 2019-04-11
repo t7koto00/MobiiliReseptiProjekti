@@ -18,12 +18,9 @@
           android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AddRecipe"
                   android:screenOrientation="portrait"></activity>
-        <activity android:name=".RecipeListView" />
+        <activity android:name=".Ingredients" />
         <activity android:name=".Login" />
-        <activity
-            android:name=".AddRecipe"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Ingredients" />            <intent-filter>
+        <activity android:name=".RecipeListView" >            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
