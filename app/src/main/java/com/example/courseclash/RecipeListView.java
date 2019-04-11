@@ -1,31 +1,30 @@
 package com.example.courseclash;
 
+
 import android.content.Intent;
+
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+
 import android.widget.ListView;
-import android.widget.TextView;
+import android.support.v7.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class RecipeListView extends AppCompatActivity{
+public class RecipeListView extends BaseActivity {
 
     public ArrayList<Recipe> recipeList = new ArrayList<>();
     ListView listView = null;
@@ -34,9 +33,13 @@ public class RecipeListView extends AppCompatActivity{
     private RecipeViewAdapter rAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_view);
+        //setContentView(R.layout.activity_recipe_view);
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_recipe_view, null, false);
+        drawer.addView(contentView, 0);
 
         listView = findViewById(R.id.recipe_listview);
 

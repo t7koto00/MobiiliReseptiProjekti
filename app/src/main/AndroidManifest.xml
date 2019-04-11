@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RecipeView"></activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity"
+          android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AddRecipe"
                   android:screenOrientation="portrait"></activity>
         <activity android:name=".RecipeListView" />
@@ -22,9 +23,7 @@
         <activity
             android:name=".AddRecipe"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".Ingredients" />
-        <activity android:name=".RecipeListView">
-            <intent-filter>
+        <activity android:name=".Ingredients" />            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
