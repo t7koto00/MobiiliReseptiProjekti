@@ -1,5 +1,6 @@
 package com.example.courseclash;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,8 +51,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     public EditText editTextTags = null;
     public EditText editTextInstructions = null;
     public EditText editTextIngredients = null;
-    public Button galleryButton = null;
-    public Button cameraButton = null;
     public Button addButton = null;
     Recipe recipe = new Recipe();
     FirebaseFirestore db = null;
@@ -78,18 +78,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         editTextTags = findViewById(R.id.editTextTags);
         editTextTime = findViewById(R.id.editTextTime);
         editTextTitle = findViewById(R.id.editTextTitle);
-        galleryButton = findViewById(R.id.galleryButton);
-        cameraButton = findViewById(R.id.cameraButton);
         addButton = findViewById(R.id.addButton);
         linearLayout = findViewById(R.id.linearLayout);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(GONE);
         textViewUploading = findViewById(R.id.textViewUploading);
         textViewUploading.setVisibility(GONE);
-        galleryButton.setOnClickListener(this);
-        cameraButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
         imageView = findViewById(R.id.imageViewAdd);
+        imageView.setOnClickListener(this);
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -98,32 +95,45 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        if (view == cameraButton) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            // Ensure that there's a camera activity to handle the intent
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                // Create the File where the photo should go
-                File photoFile = null;
-                try {
-                    photoFile = createImageFile();
-                } catch (IOException ex) {
-                    // Error occurred while creating the File
+        if (view == imageView){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Add a picture:")
+                    .setPositiveButton("From your gallery", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                        }
+                    })
+                    .setNegativeButton("Take a new one", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            // Ensure that there's a camera activity to handle the intent
+                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                // Create the File where the photo should go
+                                File photoFile = null;
+                                try {
+                                    photoFile = createImageFile();
+                                } catch (IOException ex) {
+                                    // Error occurred while creating the File
+                                }
+                                // Continue only if the File was successfully created
+                                if (photoFile != null) {
+                                    Uri photoURI = FileProvider.getUriForFile(AddRecipe.this,
+                                            "com.example.android.fileprovider",
+                                            photoFile);
+                                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                                }
+                            }
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
                 }
-                // Continue only if the File was successfully created
-                if (photoFile != null) {
-                    Uri photoURI = FileProvider.getUriForFile(this,
-                            "com.example.android.fileprovider",
-                            photoFile);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
-        } else if (view == galleryButton) {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-        } else if (view == addButton) {
+         else if (view == addButton) {
 
             if (editTextTitle.getText().length() == 0 || editTextInstructions.getText().length() == 0 || editTextIngredients.getText().length() == 0 || editTextTime.getText().length() == 0) {
                 Toast.makeText(AddRecipe.this, "Some of the required fields are empty!", Toast.LENGTH_SHORT).show();

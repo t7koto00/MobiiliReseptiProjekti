@@ -28,125 +28,101 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:id="@+id/linearLayout">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add new recipe:"
-        android:layout_gravity="center"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your recipes title(*):" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:hint="Pasta bolognese"
-        android:id="@+id/editTextTitle"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time required for your recipe(*):"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="75dp"
-        android:hint="30 mins"
-        android:id="@+id/editTextTime"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add some tags (lactose free, gluten free, vegan...):"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="100dp"
-        android:hint="L, G, Vegan"
-        android:id="@+id/editTextTags"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients required for your recipe(*):"/>
-
-        <EditText
-            android:id="@+id/editTextIngredients"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="1 egg \n2 dl milk \na lot of salt\nminced meat \npepper \n2 onions"
-            android:minHeight="150dp" />
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Instructions for making your recipe(*):"/>
+            <ImageView
+                android:id="@+id/imageViewAdd"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="top"
+                android:gravity="top"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cameraph" />
 
-    <EditText
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editTextTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="Name your recipe"
+                    android:backgroundTint="@color/colorGrayStrong"
+                    android:textColor="@color/colorGrayStrong" />
+            </LinearLayout>
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="150dp"
-        android:hint="Add salt \nstir \nadd more salt \nMORE SALT \nstir stir stir stir"
-        android:id="@+id/editTextInstructions"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add an image of your recipe(*):"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="top"
-        android:gravity="top"
-        android:scaleType="centerCrop"
-        android:id="@+id/imageViewAdd"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight"
         android:gravity="center">
+        <EditText
+        android:id="@+id/editTextTags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+        android:hint="Tags(L, G, Vegan...)"
+            android:backgroundTint="@color/colorGrayStrong"
+            android:textColor="@color/colorGrayStrong"/>
+</LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose image"
-            android:id="@+id/galleryButton"/>
+            <EditText
+                android:id="@+id/editTextIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Ingredients"
+                android:backgroundTint="@color/colorGrayStrong"
+                android:textColor="@color/colorGrayStrong"
+                 />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Take new image"
-            android:id="@+id/cameraButton"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryLight"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/editTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Time required"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/colorGrayStrong"
+                    android:textColor="@color/colorGrayStrong" />
+            </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/editTextInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Instructions"
+                android:backgroundTint="@color/colorGrayStrong"
+                android:textColor="@color/colorGrayStrong"
+                android:minHeight="150dp" />
 
-            android:text="Add this recipe!"
-            android:id="@+id/addButton"/>
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:text="Upload Recipe!" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginBottom="20dp"
-            android:text="* = Required"/>
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
