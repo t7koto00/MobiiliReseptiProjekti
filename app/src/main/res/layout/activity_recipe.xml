@@ -146,7 +146,7 @@
                                 android:layout_marginRight="8dp"
                                 android:layout_marginBottom="8dp"
                                 android:adjustViewBounds="true"
-                                android:maxHeight="100dp"
+                                android:maxHeight="70dp"
                                 android:scaleType="fitCenter"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
