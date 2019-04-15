@@ -102,7 +102,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
 
-         //makeRecipe();
         getRecipe(id);
 
     }
@@ -189,7 +188,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
             //Creates the layout where the RatingBar will be and sets some of its parameters
             LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryOld), PorterDuff.Mode.SRC_ATOP);
             LinearLayout layout = new LinearLayout(this);
             LinearLayout.LayoutParams parameters =
                     new LinearLayout.LayoutParams(
@@ -199,7 +198,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             layout.setGravity(Gravity.CENTER);
             layout.addView(ratingBar);
 
-            popDialog.setIcon(android.R.drawable.btn_star_big_on);
+            popDialog.setIcon(R.drawable.star);
             popDialog.setTitle("Rate this recipe!");
             popDialog.setView(layout);
 
@@ -326,17 +325,5 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
         }
 
-    }
-
-    void makeRecipe()
-    {
-        Recipe newRecipe = new Recipe();
-        newRecipe.setId("TestiPizza");
-        newRecipe.setTitle("Pizza");
-        newRecipe.setStars(5);
-        newRecipe.setUsername("Mauno");
-        newRecipe.setTime("10 min");
-        newRecipe.setTags("L");
-        db.collection("recipes").document(newRecipe.getId()).set(newRecipe);
     }
 }

@@ -65,7 +65,6 @@
                         android:layout_marginEnd="1dp"
                         android:layout_marginRight="1dp"
                         android:layout_marginBottom="8dp"
-                        android:tint="@color/colorPrimary"
                         app:backgroundTint="@color/colorWhite"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +74,7 @@
                         app:layout_constraintVertical_bias="0.0"
                         app:maxImageSize="36dp"
                         app:rippleColor="@color/colorPrimary"
-                        app:srcCompat="@android:drawable/ic_menu_save" />
+                        app:srcCompat="@drawable/heart" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,7 +162,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:tint="@color/colorPrimary"
                         app:backgroundTint="@color/colorWhite"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -173,7 +171,7 @@
                         app:layout_constraintVertical_bias="0.0"
                         app:maxImageSize="36dp"
                         app:rippleColor="@color/colorPrimary"
-                        app:srcCompat="@android:drawable/btn_star_big_on" />
+                        app:srcCompat="@drawable/star" />
                 </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
@@ -232,44 +230,46 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
                 android:text=""
-                android:textAlignment="center"
                 android:textSize="25dp"
                 app:fontFamily="@font/raleway" />
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryLight">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="Comments:"
+        android:layout_weight="0.1"
         android:textColor="@color/colorGrayStrong"
         android:textSize="20dp"
         app:fontFamily="@font/raleway" />
-            <EditText
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/commentText"
+                    android:layout_weight="0.1"
                 app:fontFamily="@font/raleway"/>
 
-            <Button
-                android:id="@+id/commentButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Add comment"
-                android:textColor="@color/colorWhite"
-                app:fontFamily="@font/raleway"
-                android:textSize="16dp"/>
-</LinearLayout>
+                <Button
+                    android:id="@+id/commentButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Add"
+                    android:textColor="@color/colorWhite"
+                    app:fontFamily="@font/raleway"
+                    android:textSize="16dp"/></LinearLayout>
+
+
             <ListView
                 android:id="@+id/commentList"
                 android:layout_width="match_parent"
