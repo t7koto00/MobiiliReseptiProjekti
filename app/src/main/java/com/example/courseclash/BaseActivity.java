@@ -1,5 +1,6 @@
 package com.example.courseclash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -15,9 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public DrawerLayout drawer;
+    FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout under construction", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(BaseActivity.this, Login.class));
                 break;
         }
 

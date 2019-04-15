@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RecipeView"></activity>
+        <activity android:name=".Register_user"></activity>
         <activity android:name=".MainActivity"
           android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AddRecipe"

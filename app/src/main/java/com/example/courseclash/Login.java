@@ -51,6 +51,8 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -77,7 +79,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-      //  mAuth.addAuthStateListener(mAuthListener);
+      mAuth.addAuthStateListener(mAuthListener);
     }
 
     private void startSingIn(String eMail, String passWord) {
@@ -97,6 +99,7 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful()){
 
                         startActivity(new Intent(Login.this, AddRecipe.class));
+
 
 
                     } else {

@@ -64,7 +64,7 @@ public class Register_user extends AppCompatActivity {
         super.onStart();
         if(mAuth.getCurrentUser() != null) {
 
-          //  startActivity(new Intent(Register_user.this, RecipeListView.class));
+            startActivity(new Intent(Register_user.this, RecipeListView.class));
 
         }
     }
@@ -118,8 +118,8 @@ public class Register_user extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
-                            user.setUserID(documentReference.getId());
-                            db2.collection("users").document(user.getUserID()).set(user);
+                           // user.setUserID(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            db2.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
                             progressBar2.setVisibility(View.GONE);
                             finish();
                         }
@@ -127,6 +127,8 @@ public class Register_user extends AppCompatActivity {
                 } else {
                     Toast.makeText(Register_user.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar2.setVisibility(View.GONE);
+
+
                 }
 
             }

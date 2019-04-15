@@ -46,6 +46,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     public EditText commentText = null;
     public FirebaseFirestore db = null;
     public Recipe recipe = null;
+    public User user = new User();
     ArrayList<String> comments = new ArrayList<>();
     ListView commentList = null;
     commentArrayAdapter arrayAdapter = null;
@@ -313,8 +314,10 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             comments = recipe.getComments();
             comments.add(comment);
 
+
+
             recipe.setComments(comments);
-            db.collection("recipes").document(recipe.getId()).set(recipe);
+            db.collection("comments").document(user.getComments()).set(user);
 
             arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
             commentList.setAdapter(arrayAdapter);
