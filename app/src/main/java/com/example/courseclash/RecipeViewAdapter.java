@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +17,15 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
+public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterable {
 
     public ArrayList<Recipe> recipeList;
+    public ArrayList<Recipe> recipeListAll = new ArrayList<>();
     public RecipeViewAdapter(Context context, int recipe_list_item, ArrayList<Recipe> list) {
         super(context, 0,list);
 
         recipeList = list;
+        recipeListAll = new ArrayList<>(list);
 
     }
 
@@ -52,4 +56,38 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
 
         return convertView;
     }
+
+   // @androidx.annotation.NonNull
+    @Override
+    public Filter getFilter() {
+        return recipeFilter;
+    }
+    public Filter recipeFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Recipe> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(recipeListAll);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Recipe item : recipeListAll) {
+                    if (item.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            recipeList.clear();
+            recipeList.addAll((ArrayList) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
