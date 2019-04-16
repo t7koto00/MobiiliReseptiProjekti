@@ -36,7 +36,7 @@ public class RecipeListView extends BaseActivity {
     ListView listView = null;
     FirebaseFirestore db = null;
     Recipe recipe = null;
-    private RecipeViewAdapter rAdapter;
+    public RecipeViewAdapter rAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,25 +53,41 @@ public class RecipeListView extends BaseActivity {
 
         getRecipes();
 
-        rAdapter = new RecipeViewAdapter(this,R.layout.recipe_list_item, recipeList);
+        rAdapter = new RecipeViewAdapter(this, R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getBaseContext(),RecipeView.class);
+                Intent intent = new Intent(getBaseContext(), RecipeView.class);
                 intent.putExtra("DATA", recipeList.get(position).getId());
                 startActivity(intent);
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                rAdapter.getFilter().filter(newText);
                 return false;
             }
-        }); 
-        return super.onCreateOptionsMenu(menu);
+        });
+        return true;
     }
 
     public void getRecipes() {

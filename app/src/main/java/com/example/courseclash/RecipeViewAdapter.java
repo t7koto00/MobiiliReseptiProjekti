@@ -16,11 +16,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterable {
 
     public ArrayList<Recipe> recipeList;
-    public ArrayList<Recipe> recipeListAll = new ArrayList<>();
+    public ArrayList<Recipe> recipeListAll;
     public RecipeViewAdapter(Context context, int recipe_list_item, ArrayList<Recipe> list) {
         super(context, 0,list);
 
@@ -57,7 +58,7 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
         return convertView;
     }
 
-   // @androidx.annotation.NonNull
+    @NonNull
     @Override
     public Filter getFilter() {
         return recipeFilter;
