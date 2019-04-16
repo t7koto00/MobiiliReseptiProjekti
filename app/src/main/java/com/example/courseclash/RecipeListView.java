@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -40,35 +41,55 @@ public class RecipeListView extends BaseActivity {
         drawer.addView(contentView, 0);
 
         listView = findViewById(R.id.recipe_listview);
-    /*
-        Recipe newRecipe = new Recipe();
-        newRecipe.setTitle("Paskaa");
-        newRecipe.setTags("kuk");
-        newRecipe.setTime("50");
-        recipeList.add(newRecipe);
-        Recipe newRecipe2 = new Recipe();
-        newRecipe2.setTitle("Paskaa2");
-        newRecipe2.setTags("kuk2");
-        newRecipe2.setTime("502");
 
-        recipeList.add(newRecipe2);
-        Recipe newRecipe3 = new Recipe();
-        newRecipe3.setTitle("Paskaa23");
-        newRecipe3.setTags("kuk23");
-        newRecipe3.setTime("5023");
-        recipeList.add(newRecipe3);
-*/
         db = FirebaseFirestore.getInstance();
 
         getRecipes();
 
         rAdapter = new RecipeViewAdapter(this, R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
-
-
-
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                rAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        // getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //MenuItem item = menu.findItem(R.id.action_search);
+        //SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        //searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           /* @Override
+            public boolean onQueryTextSubmit(String query) {
+                //searchData(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        }); */
+        return super.onCreateOptionsMenu(menu);
+    }
+
     public void getRecipes() {
         db.collection("recipes")
                 .get()
@@ -89,33 +110,5 @@ public class RecipeListView extends BaseActivity {
                         }
                     }
                 });
-
     }
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                //searchData(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    private void searchData(String s) {
-
-
-    }*/
 }
