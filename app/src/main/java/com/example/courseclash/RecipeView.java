@@ -111,14 +111,14 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         if (view == ingredientsButton) {
             ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
-            instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorBlack, null));
+            instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorGrayStrong, null));
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorPrimary) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorWhite) );
 
             textViewRecipe.setText(recipe.getIngredients());
         }
         else if (view == instructionsButton) {
-            ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorBlack, null));
+            ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorGrayStrong, null));
             instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorWhite) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorPrimary) );
@@ -181,6 +181,8 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         if(rated == false) {
             final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
             //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
+            //ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.ProfileRatingBar);
+            //RatingBar rate = new RatingBar(contextThemeWrapper, null, 0);
             final RatingBar ratingBar = new RatingBar(this);
             ratingBar.setNumStars(5);
             ratingBar.setStepSize(1);

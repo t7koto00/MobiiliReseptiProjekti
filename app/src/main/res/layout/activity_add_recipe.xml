@@ -44,10 +44,12 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/cameraph" />
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
                 android:background="@color/colorPrimary"
                 android:gravity="center">
 
@@ -58,14 +60,23 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:hint="Name your recipe"
-                    android:backgroundTint="@color/colorGrayStrong"
+                    android:capitalize="sentences"
+                    android:minHeight="40dp"
+                    android:padding="5dp"
+                    android:background="@drawable/edittext_bg"
+                    android:backgroundTint="@color/colorPrimaryLight"
                     android:textColor="@color/colorGrayStrong" />
             </LinearLayout>
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryLight"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:minHeight="50dp"
+
         android:gravity="center">
+
         <EditText
         android:id="@+id/editTextTags"
         android:layout_width="match_parent"
@@ -73,47 +84,69 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
         android:hint="Tags(L, G, Vegan...)"
-            android:backgroundTint="@color/colorGrayStrong"
+            android:minHeight="40dp"
+            android:padding="5dp"
+            android:background="@drawable/edittext_bg"
+            android:capitalize="sentences"
             android:textColor="@color/colorGrayStrong"/>
 </LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp"
+    android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/edittext_bg"
     android:orientation="horizontal">
 
     <EditText
         android:id="@+id/editTextIngredients"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_weight="0.1"
-        android:backgroundTint="@color/colorGrayStrong"
-        android:hint="Ingredients"
+        android:layout_weight="9"
+        android:hint="Add an ingredient"
+        android:minHeight="40dp"
+        android:padding="5dp"
+        android:background="@color/colorWhite"
+        android:capitalize="sentences"
         android:textColor="@color/colorGrayStrong" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-
-        android:layout_margin="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@android:drawable/ic_input_add"
         android:tint="@color/colorWhite"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="mini"
         app:maxImageSize="36dp"
-        app:rippleColor="@color/colorPrimary" />
+        app:rippleColor="@color/colorPrimaryDark" />
+</LinearLayout>
+
 </LinearLayout>
 
 
@@ -130,8 +163,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
                 android:background="@color/colorPrimaryLight"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
                 <EditText
                     android:id="@+id/editTextTime"
                     android:layout_width="match_parent"
@@ -139,7 +176,10 @@
                     android:hint="Time required"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/colorGrayStrong"
+                    android:minHeight="40dp"
+                    android:padding="5dp"
+                    android:background="@drawable/edittext_bg"
+                    android:capitalize="sentences"
                     android:textColor="@color/colorGrayStrong" />
             </LinearLayout>
 
@@ -149,9 +189,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:padding="5dp"
+                android:background="@drawable/edittext_bg"
                 android:hint="Instructions"
-                android:backgroundTint="@color/colorGrayStrong"
                 android:textColor="@color/colorGrayStrong"
+                android:capitalize="sentences"
                 android:minHeight="150dp" />
 
             <Button
@@ -159,6 +201,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/colorWhite"
                 android:text="Upload Recipe!" />

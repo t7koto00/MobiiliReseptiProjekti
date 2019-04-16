@@ -13,4 +13,12 @@
             <item name="windowNoTitle">true</item>
         </style>
 
+    <style name="MyRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="colorControlNormal">#f57c00</item>
+        <item name="colorControlActivated">#c51162</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
 </resources>
