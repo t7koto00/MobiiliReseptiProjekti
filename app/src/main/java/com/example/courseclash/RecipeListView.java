@@ -70,7 +70,7 @@ public class RecipeListView extends BaseActivity {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-        }); */
+        }); 
         return super.onCreateOptionsMenu(menu);
     }
 
