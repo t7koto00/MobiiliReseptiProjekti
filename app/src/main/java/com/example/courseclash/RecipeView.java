@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -63,6 +64,10 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+        /*LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_recipe, null, false);
+        drawer.addView(contentView, 0);*/
 
         ingredientsButton = findViewById(R.id.ingredientButton);
         instructionsButton = findViewById(R.id.instructionsButton);
@@ -98,7 +103,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
          db = FirebaseFirestore.getInstance();
          recipe = new Recipe();
 
-         //makeRecipe();
         getRecipe(id);
 
     }
@@ -108,14 +112,14 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         if (view == ingredientsButton) {
             ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
-            instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorBlack, null));
+            instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorGrayStrong, null));
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorPrimary) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorWhite) );
 
             textViewRecipe.setText(recipe.getIngredients());
         }
         else if (view == instructionsButton) {
-            ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorBlack, null));
+            ingredientsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorGrayStrong, null));
             instructionsButton.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
             ViewCompat.setBackgroundTintList(ingredientsButton,getResources().getColorStateList(R.color.colorWhite) );
             ViewCompat.setBackgroundTintList(instructionsButton,getResources().getColorStateList(R.color.colorPrimary) );
@@ -178,6 +182,8 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         if(rated == false) {
             final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
             //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
+            //ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.ProfileRatingBar);
+            //RatingBar rate = new RatingBar(contextThemeWrapper, null, 0);
             final RatingBar ratingBar = new RatingBar(this);
             ratingBar.setNumStars(5);
             ratingBar.setStepSize(1);
@@ -185,7 +191,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
 
             //Creates the layout where the RatingBar will be and sets some of its parameters
             LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryOld), PorterDuff.Mode.SRC_ATOP);
             LinearLayout layout = new LinearLayout(this);
             LinearLayout.LayoutParams parameters =
                     new LinearLayout.LayoutParams(
@@ -195,7 +201,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             layout.setGravity(Gravity.CENTER);
             layout.addView(ratingBar);
 
-            popDialog.setIcon(android.R.drawable.btn_star_big_on);
+            popDialog.setIcon(R.drawable.star);
             popDialog.setTitle("Rate this recipe!");
             popDialog.setView(layout);
 
@@ -324,17 +330,5 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
         }
 
-    }
-
-    void makeRecipe()
-    {
-        Recipe newRecipe = new Recipe();
-        newRecipe.setId("TestiPizza");
-        newRecipe.setTitle("Pizza");
-        newRecipe.setStars(5);
-        newRecipe.setUsername("Mauno");
-        newRecipe.setTime("10 min");
-        newRecipe.setTags("L");
-        db.collection("recipes").document(newRecipe.getId()).set(newRecipe);
     }
 }

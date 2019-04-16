@@ -65,7 +65,6 @@
                         android:layout_marginEnd="1dp"
                         android:layout_marginRight="1dp"
                         android:layout_marginBottom="8dp"
-                        android:tint="@color/colorPrimary"
                         app:backgroundTint="@color/colorWhite"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +74,7 @@
                         app:layout_constraintVertical_bias="0.0"
                         app:maxImageSize="36dp"
                         app:rippleColor="@color/colorPrimary"
-                        app:srcCompat="@android:drawable/ic_menu_save" />
+                        app:srcCompat="@drawable/heart" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -96,7 +95,7 @@
                             android:layout_marginRight="80dp"
                             android:text="Fixed"
                             android:textAlignment="center"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/colorGrayStrong"
                             android:textSize="28dp"
                             app:fontFamily="@font/raleway" />
 
@@ -106,33 +105,24 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="tags"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/colorGrayStrong"
                             android:textSize="22dp"
                             app:fontFamily="@font/raleway" />
 
-                        <android.support.constraint.ConstraintLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/textViewTime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="80dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginRight="8dp"
-                                android:gravity="start"
+                                android:gravity="center"
                                 android:text="9000min"
                                 android:textSize="18dp"
-                                app:fontFamily="@font/raleway"
-                                app:layout_constraintEnd_toStartOf="@+id/imageStars"
-                                app:layout_constraintHorizontal_bias="0.258"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:fontFamily="@font/raleway" />
 
                             <ImageView
                                 android:id="@+id/imageStars"
@@ -146,35 +136,19 @@
                                 android:layout_marginRight="8dp"
                                 android:layout_marginBottom="8dp"
                                 android:adjustViewBounds="true"
-                                android:maxHeight="70dp"
+                                android:maxHeight="50dp"
                                 android:scaleType="fitCenter"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
                                 app:srcCompat="@drawable/star5" />
 
                             <TextView
                                 android:id="@+id/textViewAuthor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:gravity="end"
+                                android:gravity="center"
                                 android:text="By: Niinistö"
                                 android:textSize="18dp"
-                                app:fontFamily="@font/raleway"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.0"
-                                app:layout_constraintStart_toEndOf="@+id/imageStars"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.947" />
-                        </android.support.constraint.ConstraintLayout>
+                                app:fontFamily="@font/raleway" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -188,7 +162,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:tint="@color/colorPrimary"
                         app:backgroundTint="@color/colorWhite"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -198,7 +171,7 @@
                         app:layout_constraintVertical_bias="0.0"
                         app:maxImageSize="36dp"
                         app:rippleColor="@color/colorPrimary"
-                        app:srcCompat="@android:drawable/btn_star_big_on" />
+                        app:srcCompat="@drawable/star" />
                 </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
@@ -219,6 +192,7 @@
                         android:id="@+id/ingredientButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_button"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Ingredients"
                         android:textSize="18dp"
@@ -239,11 +213,12 @@
                         android:id="@+id/instructionsButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_button"
                         android:backgroundTint="@color/colorWhite"
                         android:text="Instructions"
                         android:textSize="18dp"
                         app:fontFamily="@font/raleway"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/colorGrayStrong" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -257,38 +232,48 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
                 android:text=""
-                android:textAlignment="center"
+                android:textColor="@color/colorGrayStrong"
                 android:textSize="25dp"
                 app:fontFamily="@font/raleway" />
 
-            <TextView
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Comments:"
+        android:layout_weight="0.1"
+        android:textColor="@color/colorGrayStrong"
+        android:textSize="20dp"
+        app:fontFamily="@font/raleway" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Comments:"
-                android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                app:fontFamily="@font/raleway" />
+                android:orientation="horizontal">
 
-            <EditText
+                <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/commentText"
+                    android:layout_weight="0.1"
+                    android:capitalize="sentences"
                 app:fontFamily="@font/raleway"/>
 
-            <Button
-                android:id="@+id/commentButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Add comment"
-                android:textColor="@color/colorWhite"
-                app:fontFamily="@font/raleway"
-                android:textSize="16dp"/>
+                <Button
+                    android:id="@+id/commentButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Add"
+                    android:textColor="@color/colorWhite"
+                    app:fontFamily="@font/raleway"
+                    android:textSize="16dp"/></LinearLayout>
+
 
             <ListView
                 android:id="@+id/commentList"
