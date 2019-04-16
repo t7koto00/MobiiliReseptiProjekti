@@ -44,9 +44,6 @@ public class RecipeListView extends BaseActivity {
         View contentView = inflater.inflate(R.layout.activity_recipe_view, null, false);
         drawer.addView(contentView, 0);
 
-        Intent intent = new Intent(getApplicationContext(), AddRecipe.class);
-        startActivity(intent);
-
         listView = findViewById(R.id.recipe_listview);
 
         db = FirebaseFirestore.getInstance();
