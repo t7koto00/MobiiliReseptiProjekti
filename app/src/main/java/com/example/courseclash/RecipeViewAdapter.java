@@ -22,11 +22,13 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
 
     public ArrayList<Recipe> recipeList;
     public ArrayList<Recipe> recipeListAll;
+
+
     public RecipeViewAdapter(Context context, int recipe_list_item, ArrayList<Recipe> list) {
         super(context, 0,list);
 
         recipeList = list;
-        recipeListAll = new ArrayList<>(list);
+       // recipeListAll = new ArrayList<>(list);
 
     }
 
@@ -37,6 +39,8 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
         recipeList.get(position);
         Recipe recipe;
         recipe = recipeList.get(position);
+        recipeListAll = new ArrayList<>(recipeList);
+
 
         if(convertView == null) {
 
