@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/card_background_selector"
         android:descendantFocusability="afterDescendants"
-        android:minHeight="240dp"
+        android:minHeight="200dp"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
@@ -23,16 +23,17 @@
 
         <TextView
             android:id="@+id/recipe_tag"
-            android:layout_width="179dp"
-            android:layout_height="39dp"
+            android:layout_width="173dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
             android:gravity="center|top"
             android:text="Text line 1"
-            android:textSize="10dp"
+            android:textSize="13dp"
             app:fontFamily="@font/raleway"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
 
         <ImageView
             android:id="@+id/recipe_image"
@@ -53,14 +54,15 @@
             android:id="@+id/recipe_title"
             android:layout_width="180dp"
             android:layout_height="47dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center|top"
             android:text="Burgeri perkele"
-            android:textSize="15dp"
+            android:textSize="18dp"
             app:fontFamily="@font/raleway"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_image" />
 
         <TextView
             android:id="@+id/recipe_time"

@@ -12,34 +12,50 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public DrawerLayout drawer;
-    FirebaseAuth mAuth;
+    public TextView navUser = null;
+    public User user = new User();
+    public FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_layout);
 
+
         //setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        navUser = findViewById(R.id.nav_username);
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
     }
 
     @Override
@@ -58,8 +74,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Logout under construction", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Logout succesful", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
+                Log.d("FSUSER2", "onComplete: " + user.getUserName());
+
                 startActivity(new Intent(BaseActivity.this, Login.class));
                 break;
         }
@@ -98,5 +116,29 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final String userID = mAuth.getCurrentUser().getUid();
+        db.collection("users").document(userID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful() ){
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            user = documentSnapshot.toObject(User.class);
+                            Log.d("FSUSER", "onComplete: " + user.getUserName());
+
+
+                            //navUser.setText(user.getUserName());
+
+                        }
+                    }
+                });
+
+
     }
 }

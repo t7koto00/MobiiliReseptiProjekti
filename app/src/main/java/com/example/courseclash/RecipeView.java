@@ -273,7 +273,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                 textViewRecipe.setText(recipe.getIngredients());
                 textViewTags.setText(recipe.getTags());
                 textViewTitle.setText(recipe.getTitle());
-                textViewAuthor.setText(recipe.getUsername());
+                textViewAuthor.setText(user.getUserName());
                 textViewTime.setText(recipe.getTime());
                 stars = recipe.getStars();
                 switch (stars){

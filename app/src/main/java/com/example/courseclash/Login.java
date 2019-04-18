@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
@@ -53,15 +54,22 @@ public class Login extends AppCompatActivity {
 
 
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if(firebaseAuth.getCurrentUser() != null){
-                    startActivity(new Intent(Login.this, RecipeListView.class));
+            mAuthListener = new FirebaseAuth.AuthStateListener(){
+                @Override
+                public  void  onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                    FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if(fUser!=null){
+
+                        Intent intent = new Intent(Login.this, RecipeListView.class);
+                        startActivity(intent);
+
+                        finish();
+                    }
                 }
-            }
-        };
+
+
+            };
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +90,22 @@ public class Login extends AppCompatActivity {
       mAuth.addAuthStateListener(mAuthListener);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthListener);
+    }
+
     private void startSingIn(String eMail, String passWord) {
 
 
@@ -98,7 +122,7 @@ public class Login extends AppCompatActivity {
 
                     if(task.isSuccessful()){
 
-                        startActivity(new Intent(Login.this, AddRecipe.class));
+                        startActivity(new Intent(Login.this, RecipeListView.class));
 
 
 

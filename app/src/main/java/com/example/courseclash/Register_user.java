@@ -114,16 +114,16 @@ public class Register_user extends AppCompatActivity {
                     user.setUserName(username);
                     user.setEmail(eMail);
 
-                    db2.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    /*db2.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-
-                           // user.setUserID(FirebaseAuth.getInstance().getCurrentUser().getUid());
+*/
+                            user.setUserID(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             db2.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
                             progressBar2.setVisibility(View.GONE);
                             finish();
-                        }
-                    });
+
+                   // });
                 } else {
                     Toast.makeText(Register_user.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar2.setVisibility(View.GONE);

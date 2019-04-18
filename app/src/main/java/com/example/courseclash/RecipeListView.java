@@ -20,7 +20,11 @@ import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,11 +41,12 @@ public class RecipeListView extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_recipe_view);
         LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_recipe_view, null, false);
+
         drawer.addView(contentView, 0);
 
         listView = findViewById(R.id.recipe_listview);
@@ -61,6 +66,8 @@ public class RecipeListView extends BaseActivity {
             }
         });
 
+
+
     }
     public void getRecipes() {
         db.collection("recipes")
@@ -70,7 +77,7 @@ public class RecipeListView extends BaseActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Tag", document.getId() + " => " + document.getData());
+
                                 recipe = document.toObject(Recipe.class);
                                 recipeList.add(recipe);
                                 rAdapter.notifyDataSetChanged();
@@ -81,4 +88,5 @@ public class RecipeListView extends BaseActivity {
                     }
                 });
     }
+
 }

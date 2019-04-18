@@ -1,6 +1,7 @@
 package com.example.courseclash;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
+
+    int stars  = 0;
 
     public ArrayList<Recipe> recipeList;
     public RecipeViewAdapter(Context context, int recipe_list_item, ArrayList<Recipe> list) {
@@ -43,6 +46,33 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> {
         Glide.with(getContext()).load(recipe.getImage()).into(recipeImage);
         TextView recipeTime = convertView.findViewById(R.id.recipe_time);
         TextView recipeTag = convertView.findViewById(R.id.recipe_tag);
+        ImageView starsImage = convertView.findViewById(R.id.recipe_stars);
+
+        stars = recipe.getStars();
+        switch (stars){
+            case 0:
+                starsImage.setImageResource(R.drawable.star0);
+                break;
+            case 1:
+                starsImage.setImageResource(R.drawable.star1);
+                break;
+            case 2:
+                starsImage.setImageResource(R.drawable.star2);
+                break;
+            case 3:
+                starsImage.setImageResource(R.drawable.star3);
+                break;
+            case 4:
+                starsImage.setImageResource(R.drawable.star4);
+                break;
+            case 5:
+                starsImage.setImageResource(R.drawable.star5);
+                break;
+
+            default:
+                break;
+        }
+
         recipeText.setText(String.valueOf(recipe.getTitle()));
         recipeTime.setText(String.valueOf(recipe.getTime()));
         recipeTag.setText(String.valueOf(recipe.getTags()));
