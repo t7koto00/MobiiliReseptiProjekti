@@ -20,7 +20,7 @@
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
-        android:backgroundTint="@color/commentBackground">
+        android:backgroundTint="@color/colorPrimaryLight">
 
         <TextView
             android:id="@+id/commentView"

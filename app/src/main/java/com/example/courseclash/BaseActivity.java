@@ -63,10 +63,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
             case R.id.nav_favorite:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavoriteFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavoriteFragment()).commit();
                 break;
             case R.id.nav_shopping_cart:
                 Intent intent = new Intent(getApplicationContext(), ShoppingList.class);
@@ -74,7 +74,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShoppingCartFragment()).commit();
                 break;
             case R.id.nav_leaderboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "Logout succesful", Toast.LENGTH_SHORT).show();
