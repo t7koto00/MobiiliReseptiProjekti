@@ -17,10 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +39,8 @@ public class RecipeListView extends BaseActivity {
     FirebaseFirestore db = null;
     Recipe recipe = null;
     public RecipeViewAdapter rAdapter;
+    public Button create_recipe_button;
+    public Button ingredients_search_button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,10 +52,30 @@ public class RecipeListView extends BaseActivity {
         drawer.addView(contentView, 0);
 
         listView = findViewById(R.id.recipe_listview);
+        create_recipe_button = findViewById(R.id.create_recipe_button);
+        ingredients_search_button = findViewById(R.id.ingredients_search_button);
+
 
         db = FirebaseFirestore.getInstance();
 
         getRecipes();
+        final Intent intent = new Intent(this, AddRecipe.class);
+
+        create_recipe_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+
+                startActivity(intent);
+
+            }
+        });
+
+        ingredients_search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RecipeListView.this, "Work in progress", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         rAdapter = new RecipeViewAdapter(this, R.layout.recipe_list_item, recipeList);
         listView.setAdapter(rAdapter);
