@@ -6,22 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/create_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Create recipe"
-        android:layout_marginTop="150dp"/>
-
-    <Button
-        android:id="@+id/ingredients_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ingredients"
-        android:layout_below="@+id/create_button"
-        android:layout_centerHorizontal="true"/>
-
 
 
 </RelativeLayout>
