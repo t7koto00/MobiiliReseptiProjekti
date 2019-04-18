@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#e2e4fe">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="create recipe"
+        android:id="@+id/create_recipe_button"
+        android:layout_marginTop="150dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/colorPrimary"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredients_search_button"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Ingredients"
+        android:background="@drawable/button_rounded"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <ListView
         android:id="@+id/recipe_listview"
