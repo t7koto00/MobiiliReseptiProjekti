@@ -5,25 +5,45 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e2e4fe">
+    android:background="@color/colorWhite">
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="create recipe"
-        android:id="@+id/create_recipe_button"
-        android:layout_marginTop="150dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/colorPrimary"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ingredients_search_button"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Ingredients"
-        android:background="@drawable/button_rounded"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:layout_marginTop="70dp">
+
+        <Button
+            android:id="@+id/create_recipe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="create recipe"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="20"
+            android:layout_marginLeft="8dp"/>
+
+        <Button
+            android:id="@+id/ingredients_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@+id/create_recipe_button"
+            android:layout_toRightOf="@+id/create_recipe_button"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="Ingredients"
+            android:textColor="@color/colorWhite"
+            android:layout_weight="20"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/recipe_listview"
@@ -34,5 +54,5 @@
         android:dividerHeight="10dp"
         android:fadingEdge="none"
         android:listSelector="@android:color/transparent"
-        android:paddingTop="55dp" />
+        android:paddingTop="25dp" />
 </LinearLayout>
