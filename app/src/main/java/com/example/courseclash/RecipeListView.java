@@ -30,11 +30,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import javax.annotation.Nullable;
 
 public class RecipeListView extends BaseActivity {
 
@@ -91,6 +95,7 @@ public class RecipeListView extends BaseActivity {
                 Intent intent = new Intent(getBaseContext(), RecipeView.class);
                 intent.putExtra("DATA", recipeList.get(position).getId());
                 startActivity(intent);
+
             }
         });
 
@@ -119,6 +124,32 @@ public class RecipeListView extends BaseActivity {
             }
         });
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("perse","perse");
+     db.collection("recipes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                recipe = document.toObject(Recipe.class);
+                                recipeList.add(recipe);
+                                rAdapter.notifyDataSetChanged();
+
+                                Log.d("perse","pers2e22323");
+                            }
+                        } else {
+                            Log.d("errortag", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
     }
 
     public void getRecipes() {
