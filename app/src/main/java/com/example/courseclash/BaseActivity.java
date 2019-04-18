@@ -52,7 +52,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavoriteFragment()).commit();
                 break;
             case R.id.nav_shopping_cart:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShoppingCartFragment()).commit();
+                Intent intent = new Intent(getApplicationContext(), ShoppingList.class);
+                startActivity(intent);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShoppingCartFragment()).commit();
                 break;
             case R.id.nav_leaderboard:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();

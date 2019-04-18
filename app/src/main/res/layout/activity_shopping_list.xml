@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShoppingList"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:textSize="24dp"
+            android:layout_weight="0.1"
+            android:fontFamily="@font/raleway"
+            android:text="Shopping list:"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@android:drawable/ic_delete"
+            app:backgroundTint="@color/colorWhite"
+            app:fabSize="mini"
+            app:maxImageSize="36dp"
+            app:rippleColor="@color/colorPrimaryLight" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_bg"
+        android:orientation="horizontal">
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/editTextAdd"
+        android:hint="Add Ingredient here"
+        android:layout_weight="0.1"
+        android:background="@color/colorWhite"
+        android:padding="5dp"
+        android:capitalize="sentences"
+        app:fontFamily="@font/raleway"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="@color/colorWhite"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:maxImageSize="36dp"
+            app:rippleColor="@color/colorPrimaryLight" />
+
+    </LinearLayout>
+<ListView
+android:id="@+id/shoppingList"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:backgroundTint="@color/colorWhite"
+android:dividerHeight="5dp"
+android:divider="@color/colorWhite"></ListView>
+</LinearLayout>

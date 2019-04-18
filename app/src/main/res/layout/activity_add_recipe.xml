@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:fontFamily="@font/raleway"
         android:id="@+id/textViewUploading"/>
 
     <ScrollView
@@ -63,6 +64,7 @@
                     android:capitalize="sentences"
                     android:minHeight="40dp"
                     android:padding="5dp"
+                    app:fontFamily="@font/raleway"
                     android:background="@drawable/edittext_bg"
                     android:backgroundTint="@color/colorPrimaryLight"
                     android:textColor="@color/colorGrayStrong" />
@@ -86,6 +88,7 @@
         android:hint="Tags(L, G, Vegan...)"
             android:minHeight="40dp"
             android:padding="5dp"
+            app:fontFamily="@font/raleway"
             android:background="@drawable/edittext_bg"
             android:capitalize="sentences"
             android:textColor="@color/colorGrayStrong"/>
@@ -125,6 +128,7 @@
         android:minHeight="40dp"
         android:padding="5dp"
         android:background="@color/colorWhite"
+        app:fontFamily="@font/raleway"
         android:capitalize="sentences"
         android:textColor="@color/colorGrayStrong" />
 
@@ -144,7 +148,7 @@
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="mini"
         app:maxImageSize="36dp"
-        app:rippleColor="@color/colorPrimaryDark" />
+        app:rippleColor="@color/colorPrimaryLight" />
 </LinearLayout>
 
 </LinearLayout>
@@ -179,6 +183,7 @@
                     android:minHeight="40dp"
                     android:padding="5dp"
                     android:background="@drawable/edittext_bg"
+                    app:fontFamily="@font/raleway"
                     android:capitalize="sentences"
                     android:textColor="@color/colorGrayStrong" />
             </LinearLayout>
@@ -194,6 +199,7 @@
                 android:hint="Instructions"
                 android:textColor="@color/colorGrayStrong"
                 android:capitalize="sentences"
+                app:fontFamily="@font/raleway"
                 android:minHeight="150dp" />
 
             <Button
@@ -204,6 +210,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/colorPrimary"
+                app:fontFamily="@font/raleway"
                 android:textColor="@color/colorWhite"
                 android:text="Upload Recipe!" />
 
