@@ -25,7 +25,8 @@
             android:text="create recipe"
             android:textColor="@color/colorWhite"
             android:layout_weight="20"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="8dp"
+            />
 
         <Button
             android:id="@+id/ingredients_search_button"
