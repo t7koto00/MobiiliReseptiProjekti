@@ -233,6 +233,30 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                             Context context = getApplicationContext();
                             CharSequence text = "Thanks for rating!";
                             int duration = Toast.LENGTH_SHORT;
+                            int stars = recipe.getStars();
+                            switch (stars){
+                                case 0:
+                                    imageStars.setImageResource(R.drawable.star0);
+                                    break;
+                                case 1:
+                                    imageStars.setImageResource(R.drawable.star1);
+                                    break;
+                                case 2:
+                                    imageStars.setImageResource(R.drawable.star2);
+                                    break;
+                                case 3:
+                                    imageStars.setImageResource(R.drawable.star3);
+                                    break;
+                                case 4:
+                                    imageStars.setImageResource(R.drawable.star4);
+                                    break;
+                                case 5:
+                                    imageStars.setImageResource(R.drawable.star5);
+                                    break;
+
+                                default:
+                                    break;
+                            }
 
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
