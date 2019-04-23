@@ -20,8 +20,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +52,7 @@ public class RecipeListView extends BaseActivity {
     public Button create_recipe_button;
     public Button ingredients_search_button;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -63,7 +66,6 @@ public class RecipeListView extends BaseActivity {
         listView = findViewById(R.id.recipe_listview);
         create_recipe_button = findViewById(R.id.create_recipe_button);
         ingredients_search_button = findViewById(R.id.ingredients_search_button);
-
 
         db = FirebaseFirestore.getInstance();
 
@@ -144,6 +146,7 @@ public class RecipeListView extends BaseActivity {
                                 rAdapter.notifyDataSetChanged();
 
                                 Log.d("perse","pers2e22323");
+
                             }
                         } else {
                             Log.d("errortag", "Error getting documents: ", task.getException());
