@@ -136,6 +136,7 @@ public class RecipeListView extends BaseActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            recipeList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 recipe = document.toObject(Recipe.class);

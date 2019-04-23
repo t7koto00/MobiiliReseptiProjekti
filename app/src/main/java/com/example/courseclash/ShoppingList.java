@@ -43,9 +43,13 @@ public class ShoppingList extends AppCompatActivity implements View.OnClickListe
         fabClear.setOnClickListener(this);
 
         shoppingList = read(this);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoppingList);
-        listView.setAdapter(arrayAdapter);
+        if (shoppingList.isEmpty()) {
 
+        }
+        else{
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoppingList);
+            listView.setAdapter(arrayAdapter);
+        }
     }
 
     @Override
