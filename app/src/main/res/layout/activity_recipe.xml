@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeView"
-    android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:background="@color/colorWhite"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".RecipeView">
 
     <ProgressBar
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_centerHorizontal="true"
-        android:id="@+id/progressBar"/>
+        android:layout_gravity="center" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/colorWhite"
-        >
+        android:backgroundTint="@color/colorWhite">
 
         <LinearLayout
+            android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout1">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -195,9 +193,9 @@
                         android:background="@drawable/rounded_button_left"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Ingredients"
-                        android:textSize="18dp"
-                        app:fontFamily="@font/raleway"
                         android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        app:fontFamily="@font/raleway_medium"
 
                         />
 
@@ -216,9 +214,9 @@
                         android:background="@drawable/rounded_button_right"
                         android:backgroundTint="@color/colorWhite"
                         android:text="Instructions"
+                        android:textColor="@color/colorGrayStrong"
                         android:textSize="18dp"
-                        app:fontFamily="@font/raleway"
-                        android:textColor="@color/colorGrayStrong" />
+                        app:fontFamily="@font/raleway_medium" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -228,52 +226,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text=""
                 android:background="@color/colorPrimaryLight"
                 android:padding="15dp"
+                android:text=""
                 android:textColor="@color/colorGrayStrong"
                 android:textSize="25dp"
                 app:fontFamily="@font/raleway" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Comments:"
-        android:layout_weight="0.1"
-        android:textColor="@color/colorGrayStrong"
-        android:textSize="20dp"
-        app:fontFamily="@font/raleway" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.1"
+                android:text="Comments:"
+                android:textColor="@color/colorGrayStrong"
+                android:textSize="20dp"
+                app:fontFamily="@font/raleway" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/edittext_bg">
+                android:background="@drawable/edittext_bg"
+                android:orientation="horizontal">
 
                 <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                    android:id="@+id/commentText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                android:id="@+id/commentText"
-                    android:hint="Write comment here"
                     android:layout_weight="0.1"
                     android:background="@color/colorWhite"
-                    android:padding="5dp"
                     android:capitalize="sentences"
-                app:fontFamily="@font/raleway"/>
+                    android:hint="Write comment here"
+                    android:padding="5dp"
+                    app:fontFamily="@font/raleway" />
 
                 <Button
                     android:id="@+id/commentButton"
@@ -284,8 +282,9 @@
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Add"
                     android:textColor="@color/colorWhite"
-                    app:fontFamily="@font/raleway"
-                    android:textSize="16dp"/></LinearLayout>
+                    android:textSize="16dp"
+                    app:fontFamily="@font/raleway_medium" />
+            </LinearLayout>
 
 
             <ListView
@@ -293,11 +292,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:dividerHeight="8dp"
-                android:divider="@color/colorWhite"></ListView>
+                android:divider="@color/colorWhite"
+                android:dividerHeight="8dp"></ListView>
         </LinearLayout>
     </ScrollView>
-
 
 
 </LinearLayout>

@@ -138,7 +138,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         });
         return super.onCreateOptionsMenu(menu);
     }
-
+  */
     @Override
     protected void onStart() {
         super.onStart();
@@ -161,5 +161,5 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 });
 
 
-    }*/
+    }
 }
