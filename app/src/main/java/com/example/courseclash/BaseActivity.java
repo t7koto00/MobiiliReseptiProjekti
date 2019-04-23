@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public DrawerLayout drawer;
-    public TextView navUser = null;
+    public TextView navUser;
+
     public User user = new User();
     public FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,7 +46,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navUser = findViewById(R.id.nav_username);
+
+
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -143,6 +146,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         final String userID = mAuth.getCurrentUser().getUid();
+        navUser = findViewById(R.id.nav_username);
+
         db.collection("users").document(userID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -155,6 +160,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
 
                             //navUser.setText(user.getUserName());
+
+
 
                         }
                     }
