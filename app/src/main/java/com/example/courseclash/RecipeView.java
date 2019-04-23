@@ -335,7 +335,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-
     }
 
     void addComment(){
@@ -344,10 +343,8 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             comments = recipe.getComments();
             comments.add(comment);
 
-
-
             recipe.setComments(comments);
-            db.collection("comments").document(user.getComments()).set(user);
+            db.collection("recipes").document(recipe.getId()).set(recipe);
 
             arrayAdapter = new commentArrayAdapter(RecipeView.this, comments);
             commentList.setAdapter(arrayAdapter);
