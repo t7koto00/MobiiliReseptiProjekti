@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
     tools:context=".Register_user">
 
     <EditText
         android:id="@+id/newEmailField"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/edittext_bg"
         android:ems="10"
         android:gravity="center"
         android:hint="E-mail"
@@ -26,19 +28,20 @@
     <EditText
         android:id="@+id/newUsernameField"
         android:layout_width="215dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/edittext_bg"
         android:gravity="center"
         android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newEmailField" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar2"
+        tools:layout_editor_absoluteX="98dp" />
 
     <EditText
         android:id="@+id/newPassField"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_bg"
         android:ems="10"
         android:gravity="center"
         android:hint="Password"
@@ -50,12 +53,13 @@
     <EditText
         android:id="@+id/newPassField2"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/edittext_bg"
         android:ems="10"
         android:gravity="center"
         android:hint="Re-type password"
@@ -66,14 +70,17 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_orange_dark"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorPrimary"
         android:text="Register"
         android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:fontFamily="@font/raleway_medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPassField2" />
 
@@ -90,6 +97,23 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="241dp"
+        android:layout_height="256dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/courseclashlogo2" />
 </android.support.constraint.ConstraintLayout>

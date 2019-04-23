@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/courseclashlogo" />
+        app:srcCompat="@drawable/courseclashlogo2" />
 
     <EditText
         android:id="@+id/passwordView"
@@ -104,11 +104,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Not a member?"
+        android:textColor="@color/colorBlack"
         android:textSize="16dp"
-        app:fontFamily="@font/raleway"
+        app:fontFamily="@font/raleway_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.963" />
@@ -126,7 +127,8 @@
         android:background="@android:color/transparent"
         android:text="Sing up"
         android:textSize="18dp"
-        app:fontFamily="@font/raleway"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/raleway_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
