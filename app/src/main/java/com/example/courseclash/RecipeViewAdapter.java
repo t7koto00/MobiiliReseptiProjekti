@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,11 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,8 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
 
     public ArrayList<Recipe> recipeList;
     public ArrayList<Recipe> recipeListAll;
+    public ArrayList<Recipe> list = new ArrayList<>();
+    FirebaseFirestore db = null;
 
 
     public RecipeViewAdapter(Context context, int recipe_list_item, ArrayList<Recipe> list) {
@@ -43,6 +51,7 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
         Recipe recipe;
         recipe = recipeList.get(position);
         recipeListAll = new ArrayList<>(recipeList);
+        db = FirebaseFirestore.getInstance();
 
 
         if(convertView == null) {
@@ -103,7 +112,9 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
             ArrayList<Recipe> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(recipeListAll);
+                filteredList.addAll(getRecipes());
+                Log.d("spiderman",  filteredList.toString());
+
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
@@ -113,6 +124,7 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
                     }
                 }
             }
+
             FilterResults results = new FilterResults();
             results.values = filteredList;
             return results;
@@ -125,4 +137,28 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
             notifyDataSetChanged();
         }
     };
+
+    public ArrayList<Recipe> getRecipes() {
+
+        db.collection("recipes")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            list.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Recipe recipe = document.toObject(Recipe.class);
+                                list.add(recipe);
+
+                            }
+                        } else {
+                            Log.d("errortag", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        Log.d("batman", list.toString());
+        return list;
+    }
 }
