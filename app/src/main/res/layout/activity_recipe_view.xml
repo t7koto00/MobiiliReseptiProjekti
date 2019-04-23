@@ -2,10 +2,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+    android:background="@drawable/loginbackground"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,35 +18,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="0dp"
+            android:layout_weight="20"
             android:background="@drawable/rounded_button"
-            android:drawableLeft="@drawable/addicon_size_adjuster"
             android:backgroundTint="@color/colorPrimary"
+            android:drawableLeft="@drawable/addicon_size_adjuster"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="create recipe"
             android:textColor="@color/colorWhite"
-            android:layout_weight="20"
-            android:layout_marginLeft="10dp"/>
+            app:fontFamily="@font/raleway_medium" />
 
         <Button
             android:id="@+id/ingredients_search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:drawableLeft="@drawable/carrot_size_adjuster"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
             android:layout_toEndOf="@+id/create_recipe_button"
             android:layout_toRightOf="@+id/create_recipe_button"
+            android:layout_weight="20"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/colorPrimary"
+            android:drawableLeft="@drawable/carrot_size_adjuster"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Ingredients"
             android:textColor="@color/colorWhite"
-            android:layout_weight="20"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="8dp"/>
+            app:fontFamily="@font/raleway_medium" />
     </LinearLayout>
 
     <ListView
