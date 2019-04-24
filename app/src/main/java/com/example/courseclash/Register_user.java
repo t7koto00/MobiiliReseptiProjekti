@@ -22,7 +22,7 @@ public class Register_user extends AppCompatActivity {
 
     private EditText editUserName, editEmail, editPassword, editPassword2;
     private Button rgstrButton;
-    private ProgressBar progressBar2;
+
     private FirebaseAuth mAuth;
     FirebaseFirestore db2 = null;
     private User user = new User();
@@ -36,9 +36,6 @@ public class Register_user extends AppCompatActivity {
         editEmail = findViewById(R.id.newEmailField);
         editPassword = findViewById(R.id.newPassField);
         editPassword2 = findViewById(R.id.newPassField2);
-
-        progressBar2 = findViewById(R.id.progressBar2);
-        progressBar2.setVisibility(View.GONE);
 
         rgstrButton = findViewById(R.id.registerButton);
 
@@ -105,33 +102,22 @@ public class Register_user extends AppCompatActivity {
         }
 
 
-        progressBar2.setVisibility(View.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(eMail,pass2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
-
                     user.setUserName(username);
                     user.setEmail(eMail);
-
-                    /*db2.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-*/
                             user.setUserID(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             db2.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
-                            progressBar2.setVisibility(View.GONE);
                             finish();
 
-                   // });
                 } else {
                     Toast.makeText(Register_user.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    progressBar2.setVisibility(View.GONE);
-
 
                 }
-
             }
         });
     }
