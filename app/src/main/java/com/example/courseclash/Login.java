@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register_user.class));
 
+
             }
         });
 
@@ -123,6 +124,7 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful()){
 
                         startActivity(new Intent(Login.this, RecipeListView.class));
+
 
 
 

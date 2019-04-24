@@ -99,6 +99,7 @@ public class RecipeListView extends BaseActivity {
                 intent.putExtra("DATA", recipeList.get(position).getId());
                 startActivity(intent);
 
+
             }
         });
 

@@ -330,7 +330,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                 commentList.setAdapter(arrayAdapter);
                 Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
                 spinner.setVisibility(View.GONE);
-                linearLayout.setVisibility(LinearLayout.VISIBLE);
+               linearLayout.setVisibility(LinearLayout.VISIBLE);
 
             }
         });
@@ -350,6 +350,12 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
             commentList.setAdapter(arrayAdapter);
             Utility.setListViewHeightBasedOnChildren(commentList, arrayAdapter);
         }
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
 
     }
 }
