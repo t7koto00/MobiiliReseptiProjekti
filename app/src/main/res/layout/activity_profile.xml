@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ingredients">
+    tools:context=".Profile">
 
-   <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:src="@drawable/ingredientlist"
-       android:id="@+id/imageViewIngredient"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/profile"
+        android:id="@+id/imageViewProfile"/>
+
 </LinearLayout>

@@ -67,8 +67,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_profile:
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(profileIntent);
                 break;
             case R.id.nav_favorite:
+                Toast.makeText(this, "Favorites are a work in progress.", Toast.LENGTH_SHORT).show();
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FavoriteFragment()).commit();
                 break;
             case R.id.nav_shopping_cart:
@@ -77,6 +80,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShoppingCartFragment()).commit();
                 break;
             case R.id.nav_leaderboard:
+                Intent leaderBoardIntent = new Intent(getApplicationContext(), leaderboard.class);
+                startActivity(leaderBoardIntent);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment()).commit();
                 break;
             case R.id.nav_logout:

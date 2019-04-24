@@ -84,7 +84,8 @@ public class RecipeListView extends BaseActivity {
         ingredients_search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RecipeListView.this, "Work in progress", Toast.LENGTH_SHORT).show();
+                Intent profileIntent = new Intent(getApplicationContext(), Ingredients.class);
+                startActivity(profileIntent);
             }
         });
 

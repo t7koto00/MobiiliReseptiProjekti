@@ -152,7 +152,7 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
         //Väliaikaisesti avaa kehotus kirjautua
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
-        popDialog.setTitle("Please login to add this to your favorites list");
+        popDialog.setTitle("Favorites are a work in progress.");
 
         popDialog.setPositiveButton(android.R.string.ok,
 
