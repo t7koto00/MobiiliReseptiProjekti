@@ -65,6 +65,7 @@ public class Register_user extends AppCompatActivity {
         if(mAuth.getCurrentUser() != null) {
 
             startActivity(new Intent(Register_user.this, RecipeListView.class));
+            overridePendingTransition(R.anim.slide_out_down, R.anim.slide_in_up);
 
         }
     }
