@@ -179,9 +179,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             ingredients = ingredients + "\n";
         }
         recipe.setIngredients(ingredients);
-        //tekijän nimi
-        //tekijän id
-        //osaksi recipeä!
+
         ArrayList<Integer> emptyRatingList = new ArrayList<>();
         emptyRatingList.add(0);
         emptyRatingList.add(0);

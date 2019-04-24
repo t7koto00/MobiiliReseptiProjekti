@@ -1,7 +1,5 @@
 package com.example.courseclash;
 
-import android.media.Image;
-import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +15,6 @@ public class Ingredients extends AppCompatActivity implements View.OnClickListen
 
         imageView = findViewById(R.id.imageViewIngredient);
         imageView.setOnClickListener(this);
-
-
     }
 
     @Override

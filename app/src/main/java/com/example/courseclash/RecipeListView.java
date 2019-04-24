@@ -52,7 +52,6 @@ public class RecipeListView extends BaseActivity {
     public Button create_recipe_button;
     public Button ingredients_search_button;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -99,7 +98,6 @@ public class RecipeListView extends BaseActivity {
                 intent.putExtra("DATA", recipeList.get(position).getId());
                 startActivity(intent);
 
-
             }
         });
 
@@ -133,7 +131,6 @@ public class RecipeListView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("perse","perse");
      db.collection("recipes")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -146,8 +143,6 @@ public class RecipeListView extends BaseActivity {
                                 recipe = document.toObject(Recipe.class);
                                 recipeList.add(recipe);
                                 rAdapter.notifyDataSetChanged();
-
-                                Log.d("perse","pers2e22323");
 
                             }
                         } else {

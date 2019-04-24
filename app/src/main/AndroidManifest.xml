@@ -17,8 +17,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".leaderboard"></activity>
-        <activity android:name=".Profile" />
+        <activity
+            android:name=".leaderboard"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Profile"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ShoppingList"
             android:screenOrientation="portrait" />
@@ -31,7 +35,9 @@
         <activity
             android:name=".AddRecipe"
             android:screenOrientation="portrait" />
-        <activity android:name=".Ingredients" />
+        <activity
+            android:name=".Ingredients"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".RecipeListView"
             android:screenOrientation="portrait" />

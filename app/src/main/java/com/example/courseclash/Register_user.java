@@ -101,8 +101,6 @@ public class Register_user extends AppCompatActivity {
             return;
         }
 
-
-
         mAuth.createUserWithEmailAndPassword(eMail,pass2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

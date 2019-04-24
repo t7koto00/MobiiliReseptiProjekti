@@ -39,7 +39,6 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
         super(context, 0,list);
 
         recipeList = list;
-       // recipeListAll = new ArrayList<>(list);
 
     }
 
@@ -113,7 +112,6 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(getRecipes());
-                Log.d("spiderman",  filteredList.toString());
 
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
@@ -158,7 +156,6 @@ public class RecipeViewAdapter extends ArrayAdapter<Recipe> implements Filterabl
                         }
                     }
                 });
-        Log.d("batman", list.toString());
         return list;
     }
 }

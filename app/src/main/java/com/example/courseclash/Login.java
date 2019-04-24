@@ -34,13 +34,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         mAuth = FirebaseAuth.getInstance();
 
         emailField = findViewById(R.id.emailView);
         passwordField = findViewById(R.id.passwordView);
-
         loginButton = findViewById(R.id.loginButton);
         singupButton = findViewById(R.id.signUpButton);
 
@@ -49,12 +46,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register_user.class));
 
-
             }
         });
-
-
-
 
             mAuthListener = new FirebaseAuth.AuthStateListener(){
                 @Override
@@ -64,7 +57,6 @@ public class Login extends AppCompatActivity {
 
                         Intent intent = new Intent(Login.this, RecipeListView.class);
                         startActivity(intent);
-
                         finish();
                     }
                 }
@@ -98,9 +90,6 @@ public class Login extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-
-
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -108,34 +97,23 @@ public class Login extends AppCompatActivity {
     }
 
     private void startSingIn(String eMail, String passWord) {
-
-
-
         if(TextUtils.isEmpty(eMail) || TextUtils.isEmpty(passWord)){
 
             Toast.makeText(this, "Fields are empty", Toast.LENGTH_LONG).show();
 
         } else {
-
             mAuth.signInWithEmailAndPassword(eMail, passWord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                     if(task.isSuccessful()){
-
                         startActivity(new Intent(Login.this, RecipeListView.class));
-
-
-
 
                     } else {
                         Toast.makeText(Login.this, "Sign In Problem", Toast.LENGTH_LONG).show();
                     }
-
                 }
             });
         }
-
 
     }
 }

@@ -64,10 +64,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        /*LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_recipe, null, false);
-        drawer.addView(contentView, 0);*/
 
         ingredientsButton = findViewById(R.id.ingredientButton);
         instructionsButton = findViewById(R.id.instructionsButton);
@@ -147,9 +143,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     }
 
     void favorite() {
-        //lisää resepti favorite listalle
-
-        //Väliaikaisesti avaa kehotus kirjautua
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
 
         popDialog.setTitle("Favorites are a work in progress.");
@@ -160,8 +153,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
-
-                       //vie rekisteröinti sivulel!
                     }
                 })
 
@@ -181,9 +172,6 @@ public class RecipeView extends AppCompatActivity implements View.OnClickListene
     void rate() {
         if(rated == false) {
             final AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
-            //Creates a new RatingBar and specifies the parameters: setNumStars, setStepSize, setRating
-            //ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.ProfileRatingBar);
-            //RatingBar rate = new RatingBar(contextThemeWrapper, null, 0);
             final RatingBar ratingBar = new RatingBar(this);
             ratingBar.setNumStars(5);
             ratingBar.setStepSize(1);
